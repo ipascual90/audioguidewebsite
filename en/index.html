@@ -167,21 +167,37 @@
 
 <!-- WHAT IS VAGARI --------------------------------------------------------------->
 <section class="section" id="what-is">
-    <div class="container">
-        <div class="content-wrapper">
-            <div class="image-content">
-                <video src="/assets/vagariPlatform.mp4" autoplay muted loop style="max-width:100%;border-radius:20px;box-shadow:var(--shadow-heavy);"></video>
-            </div>
-            <div class="text-content">
-                <h2>What is Vagari?</h2>
-                <p style="font-size:1.2rem;line-height:1.7;margin-top:1rem;">
-                    An intuitive digital platform with the best AI tools to create, manage and
-                    distribute audioguides adapted to your user groups – in minutes.
-                </p>
-            </div>
-        </div>
+  <div class="container">
+    <div class="content-wrapper">
+
+      <!----- video ----->
+      <div class="image-content">
+        <video autoplay
+               muted
+               loop
+               playsinline          <!-- iOS needs this for auto-play -->
+               preload="auto"       <!-- start buffering as soon as possible -->
+               style="max-width:100%;border-radius:20px;box-shadow:var(--shadow-heavy);">
+          <source src="/assets/whatIsVagari.mov" type="video/quicktime">
+          <!-- Optional: put an mp4 as a 2nd source for widest browser support -->
+          <!-- <source src="/assets/whatIsVagari.mp4" type="video/mp4"> -->
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <!----- text ----->
+      <div class="text-content">
+        <h2>What is Vagari?</h2>
+        <p style="font-size:1.2rem;line-height:1.7;margin-top:1rem;">
+          An intuitive digital platform with the best AI tools to create, manage and
+          distribute audioguides adapted to your user groups – in minutes.
+        </p>
+      </div>
+
     </div>
+  </div>
 </section>
+
 
 <!-- VISITOR APP ------------------------------------------------------------------>
 <section class="section" id="visitor-app">
