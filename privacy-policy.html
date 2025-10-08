@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad - Vagari</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-primary: #2c3e50;
+            --text-light: #ecf0f1;
+            --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.37);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(45deg, #f0f2f5, #ffffff);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header-banner {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+            color: var(--text-primary);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-light);
+        }
+
+        .banner-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+
+        .company-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .back-button {
+            margin-left: auto;
+            padding: 0.5rem 1rem;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 20px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .privacy-content {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .privacy-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        .privacy-content h2 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+            color: var(--text-primary);
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        .privacy-content p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            color: #5a6c7d;
+        }
+
+        .privacy-content ul {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .privacy-content li {
+            margin-bottom: 0.5rem;
+            color: #5a6c7d;
+        }
+
+        .contact-info {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 4px solid #667eea;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .privacy-content {
+                padding: 2rem;
+                margin: 2rem 0;
+            }
+
+            .privacy-content h1 {
+                font-size: 2rem;
+            }
+
+            .banner-content {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .back-button {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-banner">
+        <div class="container">
+            <div class="banner-content">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <img src="../assets/logo.png" alt="Vagari Logo" class="logo">
+                    <a href="#" class="company-name">Vagari</a>
+                </div>
+                <a href="index.html" class="back-button">← Volver al inicio</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Privacy Policy Content -->
+    <main class="container">
+        <div class="privacy-content">
+            <h1>Política de Privacidad</h1>
+            
+            <p>Privacy Policy
+Back to Home
+
+Last updated: March 27, 2025
+
+This privacy policy governs your use of the software application Vagari (“Application”) for mobile devices that was created by Isidro Pascual. The Application is a chat interface with an artificial intelligence guide that has been enriched with context to serve as a helpful guide to the visitor of a cultural place.
+
+What information does the Application obtain and how is it used?
+User Provided Information:
+The Application obtains the information you provide when you download and use the Application, including, but not limited to, photographs taken using the Application’s camera feature or imported from the device.
+
+Automatically Collected Information:
+In addition, the Application may collect certain information automatically, including, but not limited to, the type of mobile device you use, your mobile operating system, and information about the way you use the Application.
+
+Does the Application collect precise real time location information of the device?
+The Application does not collect precise information about the location of your mobile device.
+
+Do third parties see and/or have access to information obtained by the Application?
+
+Only aggregated, anonymized data may be transmitted to external services to help us improve the Application and our service. We will share your information with third parties only in the ways that are described in this privacy statement.
+
+We may disclose User Provided and Automatically Collected Information:
+
+as required by law, such as to comply with a subpoena, or similar legal process;
+when we believe in good faith that disclosure is necessary to protect our rights, protect your safety or the safety of others, investigate fraud, or respond to a government request;
+with our trusted services providers who work on our behalf, do not have an independent use of the information we disclose to them, and have agreed to adhere to the rules set forth in this privacy statement.
+What are my opt-out rights?
+You can stop all collection of information by the Application by uninstalling the Application, using the standard uninstall processes available on your mobile device or via the mobile application marketplace or network.
+
+Data Retention Policy, Managing Your Information
+We will retain User Provided data and Automatically Collected information for as long as you use the Application and we reserve the right to retain it indefinitely thereafter. To request that your data be permanently deleted, please contact us via email at help@pactapp.co.
+
+Children
+We do not use the Application to knowingly solicit data from or market to children under the age of 13. If a parent or guardian becomes aware that his or her child has provided us with information without their consent, he or she should contact us at help@pactapp.co. We will delete such information from our files within a reasonable time.
+
+Security
+We are committed to safeguarding the confidentiality of your information. We provide physical, electronic, and procedural safeguards to protect information we process and maintain. Please be aware that, although we endeavor provide reasonable security for information we process and maintain, no security system can prevent all potential security breaches.
+
+Changes
+This Privacy Policy may be updated from time to time for any reason. We will notify you of any changes to our Privacy Policy by posting the new Privacy Policy here. You are advised to consult this Privacy Policy regularly for any changes, as continued use is deemed approval of all changes.
+
+Your Consent
+By using the Application, you are consenting to our processing of your information as set forth in this Privacy Policy now and as amended by us. “Processing” means using cookies on a computer/handheld device or using or touching information in any way, including, but not limited to, collecting, storing, deleting, using, combining and disclosing information.
+
+Contact us
+If you have any questions regarding privacy while using the Application, or have questions about our practices, please contact us via email at info@vagariknows.com
+</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Vagari. Transformando experiencias culturales con inteligencia artificial.</p>
+        </div>
+    </footer>
+</body>
+</html>
