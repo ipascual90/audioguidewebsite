@@ -759,26 +759,48 @@
      ORIGINAL  JS  (only two selectors updated so the new buttons open the modal)
 ================================================================================= -->
 <script>
-    /* ---------- language switch (ES at “/”, EN at “/en”) ------------------ */
+    /* --- automatic, one-time redirection ---------------------------------- */
+    (function () {
+    /* run this block only once per browser session so we don't annoy users */
+    if (sessionStorage.getItem('langRedirectDone')) return;
+    sessionStorage.setItem('langRedirectDone', 'yes');
+
+    /* we only redirect when somebody lands on the root “/” --------------- */
+    const onRoot       = window.location.pathname === '/' ||
+                        window.location.pathname === '/index.html';
+    if (!onRoot) return;
+
+    /* read the main browser language                                      */
+    const browserLang  = (navigator.language || 'en').toLowerCase();
+
+    /* if it does NOT start with “es” we assume the visitor prefers English */
+    if (!browserLang.startsWith('es')) {
+        window.location.replace('/en');        // swap “/en” if your folder changes
+    }
+
+    /* optional tiny geo-fallback: anybody whose language starts with “es” 
+        but is NOT in Spain (“es-es”) still stays in ES, which is what
+        you asked for. */
+    })();
+    /* --- language switch -------------------------------------------------- */
+    (function () {
     const switchBtn = document.getElementById('switch-language');
 
-    /* Read the visitor’s last choice (if any) */
-    const stored   = localStorage.getItem('preferredLang') || 'en';   // default EN
-    const showing  = stored === 'en' ? 'ES' : 'EN';                   // show target
-    switchBtn.textContent = showing;
+    /* Is the page we are looking at the English one?                      */
+    const onEnglishPage = window.location.pathname.startsWith('/en');
 
-    /* Toggle & redirect ---------------------------------------------------- */
+    /* Write the opposite language in the button …                         */
+    switchBtn.textContent = onEnglishPage ? 'ES' : 'EN';
+
+    /* …and send the visitor there when he clicks                          */
     switchBtn.addEventListener('click', () => {
-    const target = switchBtn.textContent.toLowerCase();   // “es” or “en”
-    localStorage.setItem('preferredLang', target);
-
-    /* where should we go? */
-    if (target === 'es') {
-        window.location.href = '/';        // Spanish lives at the root
-    } else {
-        window.location.href = '/en';      // adjust if your EN folder is different
-    }
+        if (onEnglishPage) {
+        window.location.href = '/';         // go to Spanish root
+        } else {
+        window.location.href = '/en';       // go to English version
+        }
     });
+    })();
 
     // scroll progress bar
     window.addEventListener('scroll',()=>{
