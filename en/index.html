@@ -633,14 +633,25 @@
      ORIGINAL  JS  (only two selectors updated so the new buttons open the modal)
 ================================================================================= -->
 <script>
-    // language switch
+    /* ---------- language switch (ES at “/”, EN at “/en”) ------------------ */
     const switchBtn = document.getElementById('switch-language');
-    switchBtn.textContent = 'ES';           // show the target language
 
+    /* Read the visitor’s last choice (if any) */
+    const stored   = localStorage.getItem('preferredLang') || 'en';   // default EN
+    const showing  = stored === 'en' ? 'ES' : 'EN';                   // show target
+    switchBtn.textContent = showing;
+
+    /* Toggle & redirect ---------------------------------------------------- */
     switchBtn.addEventListener('click', () => {
-    const next = switchBtn.textContent === 'ES' ? 'EN' : 'ES';
-    localStorage.setItem('preferredLang', next.toLowerCase());
-    location.href='/';
+    const target = switchBtn.textContent.toLowerCase();   // “es” or “en”
+    localStorage.setItem('preferredLang', target);
+
+    /* where should we go? */
+    if (target === 'es') {
+        window.location.href = '/';        // Spanish lives at the root
+    } else {
+        window.location.href = '/en';      // adjust if your EN folder is different
+    }
     });
 
     // modal
