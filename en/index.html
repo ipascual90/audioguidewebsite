@@ -346,6 +346,8 @@
     .demo-inline-form button:hover{
     transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.18);
     }
+    /* highlight bar must not catch clicks */
+    .cta-button::before{ pointer-events:none; }
         
     </style>
 </head>
