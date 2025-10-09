@@ -147,38 +147,33 @@
             max-width:340px;                  /* hard cap for large desks */
             }
 
-            @media (max-width:767px){           /* phones / small tablets   */
-            #visitor-app .image-content video{
-                width:70%;                      /* a bit larger on small screens */
-            }
-            }
+        @media (max-width:767px){           /* phones / small tablets   */
+        #visitor-app .image-content video{
+            width:70%;                      /* a bit larger on small screens */
+        }
+        }
         
         .features-list{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-            gap:1.8rem;
-            margin-top:3rem;
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+        gap:1.8rem;
+        margin-top:3rem;
+        perspective:1000px;   
         }
-
-        .features-list li{                /*  ➜ the “card holder”  /
+        .feature-card{                     
         list-style:none;
-        perspective:1000px;           / allows the 3-D flip    */
-        min-height:180px;
-        }
-
-        .feature-card{                    /*  ➜ the thing that flips  */
         position:relative;
-        width:100%;height:100%;
+        height:180px;                      
         transform-style:preserve-3d;
         transition:transform .8s cubic-bezier(.4,.2,.2,1);
         border-radius:14px;
         box-shadow:var(--shadow-light);
         }
-
-        .features-list li:hover .feature-card{
+        .feature-card:hover{
         transform:rotateY(180deg);
         }
 
+        /* two faces -------------------------------------------------*/
         .feature-card .front,
         .feature-card .back{
         position:absolute;inset:0;
@@ -189,24 +184,22 @@
         gap:.9rem;
         backface-visibility:hidden;
         }
-
         .feature-card .front{
         background:rgba(255,255,255,.85);
         }
-
         .feature-card .back{
         background:var(--accent-gradient);
         color:#fff;
         transform:rotateY(180deg);
-        text-align:center;                   /* icon centred */
+        text-align:center;
         align-items:center;
         }
 
         /* icon sizes ----------------------------------------------*/
         .feature-icon{font-size:2rem;line-height:1}
-        .feature-card .back .feature-icon{font-size:3.4rem;margin-bottom:.4rem
-        }
-        }
+        .feature-card .back .feature-icon{font-size:3.4rem;margin-bottom:.4rem}
+    }
+        
     </style>
 </head>
 
@@ -385,120 +378,102 @@
     <div class="container">
         <h2>Features</h2>
         <ul class="features-list">
-            <li>
-                <div class="feature-card">
-                    <div class="front">
-                        <span class="feature-icon">🤖</span>
-                        <p>AI Script Agent with manual controls for length, audience and style</p>
-                    </div>
-                    <div class="back">
-                        <span class="feature-icon">🤖</span>
-                        Auto-write engaging scripts
-                    </div>
+            <li class="feature-card">
+                <div class="front">
+                    <span class="feature-icon">🤖</span>
+                    <p>AI Script Agent with manual controls for length, audience and style</p>
+                </div>
+                <div class="back">
+                    <span class="feature-icon">🤖</span>
+                    Auto-write engaging scripts
                 </div>
             </li>
 
-            <li>
-                <div class="feature-card">
-                    <div class="front">
-                        <span class="feature-icon">🎙️</span>
-                        <p>AI Voice Agent with multiple voices &amp; narration styles</p>
-                    </div>
-                    <div class="back">
-                        <span class="feature-icon">🎙️</span>
-                        Natural-sounding audio
-                    </div>
+            <li class="feature-card">
+                <div class="front">
+                    <span class="feature-icon">🎙️</span>
+                    <p>AI Voice Agent with multiple voices &amp; narration styles</p>
+                </div>
+                <div class="back">
+                    <span class="feature-icon">🎙️</span>
+                    Natural-sounding audio
                 </div>
             </li>
 
-            <li>
-                <div class="feature-card">
-                    <div class="front">
-                        <span class="feature-icon">🌐</span>
-                        <p>40+ languages, generated automatically</p>
-                    </div>
-                    <div class="back">
-                        <span class="feature-icon">🌐</span>
-                        Speak every language
-                    </div>
+            <li class="feature-card">
+                <div class="front">
+                    <span class="feature-icon">🌐</span>
+                    <p>40+ languages, generated automatically</p>
+                </div>
+                <div class="back">
+                    <span class="feature-icon">🌐</span>
+                    Speak every language
                 </div>
             </li>
 
-            <li>
-                <div class="feature-card">
-                    <div class="front">
-                        <span class="feature-icon">🗺️</span>
-                        <p>Thematic itineraries</p>
-                    </div>
-                    <div class="back">
-                        <span class="feature-icon">🗺️</span>
-                        Curated tours
-                    </div>
+            <li class="feature-card">
+                <div class="front">
+                    <span class="feature-icon">🗺️</span>
+                    <p>Thematic itineraries</p>
+                </div>
+                <div class="back">
+                    <span class="feature-icon">🗺️</span>
+                    Curated tours
                 </div>
             </li>
 
-            <li>
-                <div class="feature-card">
-                    <div class="front">
-                        <span class="feature-icon">🖥️</span>
-                        <p>Web admin console &amp; visitor app</p>
-                    </div>
-                    <div class="back">
-                        <span class="feature-icon">🖥️</span>
-                        Control &amp; deliver
-                    </div>
+            <li class="feature-card">
+                <div class="front">
+                    <span class="feature-icon">🖥️</span>
+                    <p>Web admin console &amp; visitor app</p>
+                </div>
+                <div class="back">
+                    <span class="feature-icon">🖥️</span>
+                    Control &amp; deliver
                 </div>
             </li>
 
-            <li>
-                <div class="feature-card">
-                    <div class="front">
-                        <span class="feature-icon">💸</span>
-                        <p>Monetization tools built-in</p>
-                    </div>
-                    <div class="back">
-                        <span class="feature-icon">💸</span>
-                        Earn while they learn
-                    </div>
+            <li class="feature-card">
+                <div class="front">
+                    <span class="feature-icon">💸</span>
+                    <p>Monetization tools built-in</p>
+                </div>
+                <div class="back">
+                    <span class="feature-icon">💸</span>
+                    Earn while they learn
                 </div>
             </li>
 
-            <li>
-                <div class="feature-card">
-                    <div class="front">
-                        <span class="feature-icon">📱</span>
-                        <p>QR code access for tours &amp; app</p>
-                    </div>
-                    <div class="back">
-                        <span class="feature-icon">📱</span>
-                        1-tap entry
-                    </div>
+            <li class="feature-card">
+                <div class="front">
+                    <span class="feature-icon">📱</span>
+                    <p>QR code access for tours &amp; app</p>
+                </div>
+                <div class="back">
+                    <span class="feature-icon">📱</span>
+                    1-tap entry
                 </div>
             </li>
 
-            <li>
-                <div class="feature-card">
-                    <div class="front">
-                        <span class="feature-icon">📈</span>
-                        <p>Insights into visitor behaviour</p>
-                    </div>
-                    <div class="back">
-                        <span class="feature-icon">📈</span>
-                        Understand your audience
-                    </div>
+            <li class="feature-card">
+                <div class="front">
+                    <span class="feature-icon">📈</span>
+                    <p>Insights into visitor behaviour</p>
+                </div>
+                <div class="back">
+                    <span class="feature-icon">📈</span>
+                    Understand your audience
                 </div>
             </li>
 
-            <li>
-                <div class="feature-card">
-                    <div class="front">
-                        <span class="feature-icon">📴</span>
-                        <p>Offline access</p>
-                    </div>
-                    <div class="back">
-                        <span class="feature-icon">📴</span>
-                        Works without signal
-                    </div>
+            <li class="feature-card">
+                <div class="front">
+                    <span class="feature-icon">📴</span>
+                    <p>Offline access</p>
+                </div>
+                <div class="back">
+                    <span class="feature-icon">📴</span>
+                    Works without signal
                 </div>
             </li>
         </ul>
