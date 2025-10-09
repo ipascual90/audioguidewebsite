@@ -134,6 +134,24 @@
             width: 100%;
             max-width: none;                  /* remove the old 120 % cap */
         }
+        #audience .audience-grid{
+            grid-template-columns: repeat(3, 1fr);   /* 3 columns */
+        }
+        
+        #visitor-app .image-content{
+            justify-content:center;          /* keep it nicely centred   */
+            }
+
+            #visitor-app .image-content video{
+            width:50%;                        /* ± half the original size */
+            max-width:340px;                  /* hard cap for large desks */
+            }
+
+            @media (max-width:767px){           /* phones / small tablets   */
+            #visitor-app .image-content video{
+                width:70%;                      /* a bit larger on small screens */
+            }
+            }
         }
     </style>
 </head>
