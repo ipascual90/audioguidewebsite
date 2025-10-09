@@ -125,6 +125,16 @@
         /* features list */
         .features-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem}
         .features-list li{list-style:none;background:rgba(255,255,255,.8);padding:1.5rem 1.8rem;border-radius:14px;box-shadow:var(--shadow-light)}
+        
+        /* ─── MODAL : hidden by default ───────────────────────────── */ 
+        #contactModal {display:none;} /* start closed */ 
+        #contactModal.open {display:flex !important;} /* show on demand */
+        #contactModal .close-modal{
+        position:absolute;top:16px;right:18px;
+        font-size:1.8rem;line-height:1;cursor:pointer;
+        color:#777;background:none;border:none;
+        }
+        
         /* === enlarge the video in the “What is Vagari?” section ===================== */
         @media (min-width: 1024px) {          /* desktop / tablets */
         #what-is .image-content { flex: 2; }   /* video column 2-parts   */
@@ -313,6 +323,30 @@
     #contactModal .modal-content{
         margin:0 auto;         /* horizontal centring                    */
     }
+
+    /* ─── INLINE form inside the last CTA ─────────────────────── */
+    .demo-inline-form{
+    max-width:540px;margin:3.5rem auto 0;
+    padding:2.2rem 2.4rem;
+    background:rgba(255,255,255,.85);
+    border-radius:18px;box-shadow:var(--shadow-light);
+    }
+    .demo-inline-form h3{margin-bottom:1.4rem;text-align:center}
+
+    .demo-inline-form input,
+    .demo-inline-form textarea{
+    width:100%;padding:.85rem 1rem;margin-bottom:1rem;
+    border:1px solid #d0d0d0;border-radius:10px;font-size:1rem;
+    font-family:inherit;background:rgba(255,255,255,.9);
+    }
+    .demo-inline-form button{
+    width:100%;padding:1rem 0;border:none;border-radius:50px;
+    background:var(--primary-gradient);color:#fff;font-weight:600;
+    cursor:pointer;transition:.25s;
+    }
+    .demo-inline-form button:hover{
+    transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.18);
+    }
         
     </style>
 </head>
@@ -334,7 +368,7 @@
 
       <!-- TWO compact buttons ------------------------------------------->
       <div class="cta-group">
-        <a href="#demo"    class="cta-button"          id="openModalDemoHeader">Book a demo</a>
+        <a class="cta-button open-contact">Book a demo</a>
         <a href="#contact" class="cta-button secondary" id="openModalHeader">Get in touch</a>
       </div>
 
@@ -354,7 +388,7 @@
             <p class="subtitle">Bring your space to life with your own immersive, personalized audio tours. No contractors, no delays, no coding. Your stories, told your way.</p>
 
             <div class="cta-wrapper">
-                <a href="#demo" class="cta-button" id="openModalDemo">Book a demo</a>
+                <a class="cta-button open-contact">Book a demo</a>
                 <a href="#contact" class="cta-button secondary" id="openModal">Get in touch</a>
             </div>
         </div>
@@ -609,15 +643,29 @@
         <p>Book a personalised demo or simply get in touch – we’ll answer in 24 h.</p>
 
         <div class="cta-wrapper">
-            <a href="#demo"      class="cta-button"          id="openModalDemo2">Book a demo</a>
+            <a class="cta-button open-contact">Book a demo</a>
             <a href="#contact"   class="cta-button secondary" id="openModal2">Get in touch</a>
         </div>
     </div>
+    <form action="https://formspree.io/f/xvgraeoa" method="POST" class="demo-inline-form"> <h3>Ask for your personalised demo</h3>
+        <input type="text"   name="name"     placeholder="Name"     required>
+        <input type="text"   name="surname"  placeholder="Surname"  required>
+        <input type="email"  name="email"    placeholder="Email"    required>
+        <input type="text"   name="entity"   placeholder="Entity"   required>
+        <input type="text"   name="role"     placeholder="Role">
+        <textarea name="message" placeholder="Message"
+                    style="min-height:100px;resize:vertical"></textarea>
+        <button type="submit">Send</button>
+        <p style="text-align:center;margin-top:1rem;color:#666;font-size:.9rem;">
+            Or email us at isidro@vagariknows.com
+        </p>
+     </form>
 </section>
 
 <!-- MODAL (unchanged) & FOOTER --------------------------------------------------->
 <div id="contactModal" class="modal">
     <div class="modal-content">
+        <button class="close-modal" aria-label="Close">&times;</button>
         <h2>Contact us</h2>
         <form action="https://formspree.io/f/xvgraeoa" method="POST">
             <p style="text-align:center;margin-top:1rem;color:#666;font-size:.9rem;">Share your contact info and we'll reach out in 24 hours</p>
@@ -694,6 +742,31 @@
     document.querySelectorAll('.feature-card').forEach(card=>{
         card.addEventListener('click',()=>card.classList.toggle('flipped'));
         });
+
+    /* ─── pop-up open / close logic ───────────────────────────── */
+    const contactModal   = document.getElementById('contactModal');
+    const openButtons    = document.querySelectorAll('.open-contact');
+    const closeBtn       = contactModal.querySelector('.close-modal');
+
+    /* open on any “Book a demo / Get in touch” click */
+    openButtons.forEach(btn => btn.addEventListener('click', e =>{
+    e.preventDefault();                 // stay on the page
+    contactModal.classList.add('open'); // show modal
+    document.body.style.overflow='hidden';   // stop background scroll
+    }));
+
+    /* close with the X */
+    closeBtn.addEventListener('click', () => closeModal());
+
+    /* close by clicking the shaded backdrop (but not the card) */
+    contactModal.addEventListener('click', e =>{
+    if (e.target === contactModal) closeModal();
+    });
+
+    function closeModal(){
+    contactModal.classList.remove('open');
+    document.body.style.overflow='';    // restore scroll
+    }
 </script>
 </body>
 </html>
