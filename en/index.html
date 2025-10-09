@@ -198,6 +198,17 @@
         /* icon sizes ----------------------------------------------*/
         .feature-icon{font-size:2rem;line-height:1}
         .feature-card .back .feature-icon{font-size:3.4rem;margin-bottom:.4rem}
+        .features-list{
+            display:grid;
+            gap:1.8rem;
+            grid-template-columns:repeat(auto-fill,minmax(260px,1fr));   /* 1-2 cards */
+        }
+
+        @media (min-width: 900px){      /* plenty of space ⇒ freeze at 3 */
+            .features-list{
+                grid-template-columns:repeat(3,1fr);
+            }
+        }
     }
         
     </style>
