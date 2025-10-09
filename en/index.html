@@ -633,16 +633,14 @@
      ORIGINAL  JS  (only two selectors updated so the new buttons open the modal)
 ================================================================================= -->
 <script>
-    /* ---------- language switch (minimal EN / ES) -------------------------- */
+    // language switch
     const switchBtn = document.getElementById('switch-language');
     switchBtn.textContent = 'ES';           // show the target language
 
     switchBtn.addEventListener('click', () => {
     const next = switchBtn.textContent === 'ES' ? 'EN' : 'ES';
     localStorage.setItem('preferredLang', next.toLowerCase());
-    /* in a real multilingual site you’d redirect to /es or /en pages –  */
-    /* here we just simulate it by reloading                              */
-    location.reload();
+    location.href='/';
     });
 
     // modal
