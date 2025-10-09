@@ -209,6 +209,51 @@
                 grid-template-columns:repeat(3,1fr);
             }
         }
+        @media (max-width: 767px){
+
+/* generic two-column sections → stacked      */
+    .content-wrapper{
+    flex-direction: column;
+    gap: 2rem;
+    }
+
+    /* …except on #what-is, where the HTML order
+    (video first) has to be reversed           */
+    #what-is .content-wrapper{
+    flex-direction: column-reverse;
+    }
+
+    /* make the video really take the whole width */
+    .image-content,
+    .image-content video{
+    width: 100%;
+    max-width: none;          
+    }
+
+    /* nicer radius/shadow on small screens       */
+    .image-content video{
+    border-radius: 14px;
+    }
+
+    /* ---------- feature cards ----------------- */
+    .feature-card{                 
+    cursor: pointer;
+    }
+
+    /* disable the desktop hover on touch screens */
+    @media (hover:none){
+    .feature-card:hover{
+    transform: none;
+    }
+    }
+
+    /* the real flip will be done through JS
+    (class .flipped is toggled on tap)         */
+    .feature-card.flipped{
+    transform: rotateY(180deg);
+    }
+    }
+
     }
         
     </style>
@@ -579,6 +624,9 @@
     document.querySelectorAll('.section').forEach(sec=>observer.observe(sec));
 
     /*  ripple effect, hero parallax, keyboard nav etc. – leave exactly as in your old file */
+    document.querySelectorAll('.feature-card').forEach(card=>{
+        card.addEventListener('click',()=>card.classList.toggle('flipped'));
+        });
 </script>
 </body>
 </html>
