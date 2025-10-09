@@ -299,6 +299,20 @@
     #contactModal button[type="submit"]:hover{
         transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.18);
     }
+
+    /* ───────── permanent, centred “Reach-out” form ───────── */
+    #contactModal{
+        position:fixed;        /* stay on screen even while scrolling    */
+        inset:0;               /* cover the whole viewport               */
+        display:flex !important;
+        align-items:center;
+        justify-content:center;
+        background:rgba(0,0,0,.25);          /* soft dim around the card */
+        z-index:3000;          /* above everything else                  */
+    }
+    #contactModal .modal-content{
+        margin:0 auto;         /* horizontal centring                    */
+    }
         
     </style>
 </head>
@@ -604,7 +618,6 @@
 <!-- MODAL (unchanged) & FOOTER --------------------------------------------------->
 <div id="contactModal" class="modal">
     <div class="modal-content">
-        <span class="close-button">&times;</span>
         <h2>Contact us</h2>
         <form action="https://formspree.io/f/xvgraeoa" method="POST">
             <p style="text-align:center;margin-top:1rem;color:#666;font-size:.9rem;">Share your contact info and we'll reach out in 24 hours</p>
@@ -653,19 +666,6 @@
         window.location.href = '/en';      // adjust if your EN folder is different
     }
     });
-
-    // modal
-    const modal=document.getElementById("contactModal");
-    const closeBtn=document.querySelector(".close-button");
-
-    document.addEventListener("click",(e)=>{
-        if(e.target.matches('[id^="openModal"]') || e.target.matches(".cta-button.secondary")){
-            e.preventDefault();
-            modal.style.display="flex";
-        }
-    });
-    closeBtn.addEventListener("click",()=>modal.style.display="none");
-    window.addEventListener("click",(e)=>{if(e.target===modal)modal.style.display="none"});
 
     // scroll progress bar
     window.addEventListener('scroll',()=>{
