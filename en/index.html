@@ -253,6 +253,52 @@
     transform: rotateY(180deg);
     }
     }
+    /* ───────────────── HEADER : two compact buttons ─────────────── */
+    .header-banner .cta-group{display:flex;gap:.75rem;align-items:center}
+    .header-banner .cta-button{
+        background:var(--primary-gradient);            /* vivid gradient  */
+        color:#fff;                                    /* visible on white*/
+        font-size:.83rem;padding:.55rem 1.2rem;border:none;
+    }
+    .header-banner .cta-button:hover{
+        transform:translateY(-2px);box-shadow:0 8px 26px rgba(0,0,0,.18);
+    }
+    .header-banner .cta-button.secondary{              /* outlined version*/
+        background:transparent;border:1px solid var(--text-primary);
+        color:var(--text-primary);
+    }
+    .header-banner .cta-button.secondary:hover{
+        background:var(--text-primary);color:#fff;
+    }
+
+    /* ───────────────── stylish EN / ES switch ───────────────────── */
+    #language-switcher button{
+        background:none;border:none;cursor:pointer;
+        font-weight:600;font-size:.85rem;letter-spacing:.04em;
+        color:var(--text-primary);padding:.4rem .5rem;position:relative;
+    }
+    #language-switcher button::after{                  /* little underline*/
+        content:'';position:absolute;left:0;bottom:-2px;height:2px;width:100%;
+        background:var(--accent-gradient);transform:scaleX(0);
+        transform-origin:left;transition:transform .3s;
+    }
+    #language-switcher button:hover::after{transform:scaleX(1)}
+
+    /* ───────────────── prettier contact-form ─────────────────────── */
+    #contactModal .modal-content{max-width:500px;width:92%}        /* limit width */
+    #contactModal input,#contactModal textarea{
+        width:100%;padding:.85rem 1rem;margin-bottom:1rem;
+        border:1px solid #d0d0d0;border-radius:10px;font-size:1rem;
+        font-family:inherit;background:rgba(255,255,255,.9);
+    }
+    #contactModal button[type="submit"]{
+        width:100%;padding:1rem 0;border:none;border-radius:50px;
+        background:var(--primary-gradient);color:#fff;font-weight:600;
+        cursor:pointer;transition:.25s;
+    }
+    #contactModal button[type="submit"]:hover{
+        transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.18);
+    }
         
     </style>
 </head>
@@ -264,19 +310,26 @@
 
 <!-- header ----------------------------------------------------------------------->
 <header class="header-banner" id="header">
-    <div class="container">
-        <div class="banner-content">
-            <div style="display:flex;align-items:center;gap:1rem;">
-                <img src="/assets/logo.png" class="logo" alt="Vagari logo">
-                <a class="company-name" href="#">Vagari</a>
-            </div>
-            <a class="cta-button" id="openModalHeader" href="#contact" style="padding:.8rem 1.5rem;font-size:.9rem;">Get in touch</a>
+  <div class="container">
+    <div class="banner-content">
+      <!-- logo & brand --------------------------------------------------->
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <img src="/assets/logo.png" class="logo" alt="Vagari logo">
+        <a class="company-name" href="#">Vagari</a>
+      </div>
 
-            <div id="language-switcher" style="position:fixed;top:10px;right:10px;">
-                <button id="switch-language">Español</button>
-            </div>
-        </div>
+      <!-- TWO compact buttons ------------------------------------------->
+      <div class="cta-group">
+        <a href="#demo"    class="cta-button"          id="openModalDemoHeader">Book a demo</a>
+        <a href="#contact" class="cta-button secondary" id="openModalHeader">Get in touch</a>
+      </div>
+
+      <!-- small EN / ES switch ------------------------------------------>
+      <div id="language-switcher" style="position:fixed;top:10px;right:10px;">
+        <button id="switch-language">ES</button>
+      </div>
     </div>
+  </div>
 </header>
 
 <!-- HERO ------------------------------------------------------------------------->
@@ -580,10 +633,17 @@
      ORIGINAL  JS  (only two selectors updated so the new buttons open the modal)
 ================================================================================= -->
 <script>
-    // language switch
-    const switchBtn=document.getElementById('switch-language');
-    switchBtn.textContent='Español';
-    switchBtn.addEventListener('click',()=>{localStorage.setItem('preferredLang','es');location.href='/'});
+    /* ---------- language switch (minimal EN / ES) -------------------------- */
+    const switchBtn = document.getElementById('switch-language');
+    switchBtn.textContent = 'ES';           // show the target language
+
+    switchBtn.addEventListener('click', () => {
+    const next = switchBtn.textContent === 'ES' ? 'EN' : 'ES';
+    localStorage.setItem('preferredLang', next.toLowerCase());
+    /* in a real multilingual site you’d redirect to /es or /en pages –  */
+    /* here we just simulate it by reloading                              */
+    location.reload();
+    });
 
     // modal
     const modal=document.getElementById("contactModal");
