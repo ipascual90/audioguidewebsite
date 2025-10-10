@@ -7,39 +7,473 @@
 
 <!-- Google font + the whole main stylesheet you already have -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-/* 1 –– copy the COMPLETE <style> block from index.html here … */
-/* … nothing to change …                                       */
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient:   linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dark-gradient:     linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            --glass-bg:    rgba(255, 255, 255, 0.15);
+            --glass-border:rgba(255, 255, 255, 0.2);
+            --text-primary:#2c3e50;
+            --text-light:  #ecf0f1;
+            --shadow-light:0 8px 32px rgba(31, 38, 135, 0.37);
+            --shadow-heavy:0 15px 35px rgba(31, 38, 135, 0.4);
+        }
 
-/* 2 –– minimalist extra rules for the table below             */
-.pricing-wrapper{
-    display:flex;flex-wrap:wrap;gap:2rem;justify-content:center
+        *{margin:0;padding:0;box-sizing:border-box;}
+
+        body{
+            font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+            line-height:1.6;
+            color:var(--text-primary);
+            background:linear-gradient(45deg,#f0f2f5,#ffffff);
+            overflow-x:hidden;
+        }
+
+        .container{max-width:1200px;margin:0 auto;padding:0 20px;}
+
+        /* ----- header  (glass morphism) ------------------------------------------------ */
+        .header-banner{
+            background:rgba(255,255,255,0.25);
+            backdrop-filter:blur(10px);
+            -webkit-backdrop-filter:blur(10px);
+            border-bottom:1px solid rgba(255,255,255,0.18);
+            color:var(--text-primary);
+            padding:1rem 0;
+            position:sticky;
+            top:0;
+            z-index:1000;
+            transition:.3s;
+        }
+        .header-banner.scrolled{background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);box-shadow:var(--shadow-light);}
+        .banner-content{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+        .logo{height:50px;width:auto;transition:.3s;filter:drop-shadow(0 4px 8px rgba(0,0,0,.1))}
+        .logo:hover{transform:scale(1.05) rotate(5deg);}
+        .company-name{font-size:2rem;font-weight:600;letter-spacing:.05em;background:var(--primary-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none;transition:.3s}
+        .company-name:hover{transform:translateY(-2px);filter:drop-shadow(0 4px 8px rgba(102,126,234,.3));}
+
+        /* ----- hero -------------------------------------------------------------------- */
+        .hero{
+            min-height:100vh;display:flex;align-items:center;
+            background:url('/assets/heroPhoto.jpg') center/cover no-repeat;
+            position:relative;overflow:hidden;
+        }
+        .hero::before{
+            content:'';position:absolute;inset:0;
+            background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/></svg>');
+            animation:float 20s ease-in-out infinite;
+        }
+        @keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-20px) rotate(5deg)}}
+
+        .hero-content{text-align:center;z-index:2;position:relative;animation:fadeInUp 1s ease-out;}
+        .hero h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:700;margin-bottom:1.5rem;color:#fff;text-shadow:0 4px 20px rgba(0,0,0,.3);line-height:1.2;}
+        .hero .subtitle{font-size:clamp(1.1rem,2.5vw,1.5rem);margin-bottom:3rem;color:rgba(255,255,255,.9);font-weight:400;max-width:800px;margin-inline:auto;text-shadow:0 2px 10px rgba(0,0,0,.2);}
+
+        .cta-button{display:inline-block;padding:1.2rem 3rem;background:rgba(255,255,255,.2);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3);color:#fff;text-decoration:none;border-radius:50px;font-size:1.1rem;font-weight:600;transition:.3s;box-shadow:0 8px 32px rgba(0,0,0,.2);position:relative;overflow:hidden;}
+        .cta-button::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transition:left .5s;}
+        .cta-button:hover::before{left:100%}
+        .cta-button:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.3);background:rgba(255,255,255,.3);}
+
+        /* ----- generic content sections ------------------------------------------------- */
+        .section{padding:8rem 0;opacity:0;transform:translateY(50px);transition:all 1.2s cubic-bezier(.25,.46,.45,.94);position:relative;}
+        .section.visible{opacity:1;transform:translateY(0);}
+        .section:nth-child(even){background:linear-gradient(135deg,#f8f9fa 0%,#e9ecef 100%);}
+        .section h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem;font-weight:700;background:var(--primary-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;position:relative;}
+        .section h2::after{content:'';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:80px;height:4px;background:var(--accent-gradient);border-radius:2px;animation:slideInScale .8s ease-out .5s both;}
+        @keyframes slideInScale{0%{width:0;opacity:0}100%{width:80px;opacity:1}}
+
+        .content-wrapper{display:flex;align-items:center;gap:4rem;min-height:60vh;margin:2rem 0;}
+        .text-content{flex:1;display:flex;flex-direction:column;justify-content:center;}
+        .image-content{flex:1;display:flex;justify-content:center;align-items:center;position:relative;}
+        .image-content img, .image-content video{max-width:120%;height:auto;transition:.3s;}
+        .image-content:hover img, .image-content:hover video{transform:scale(1.05) rotateY(5deg);}
+
+        /* ----- remaining   MANY  rules (value-props, how-it-works, footer, ripple, …)
+           keep them exactly as they were in your previous file …                    */
+        /* … (omitted here for brevity of this explanation – your current file already
+              has them; just leave them untouched)                                   */
+
+        /* =================================================================================
+           NEW small rules required by the fresh sections / buttons (appended at the end)
+           ================================================================================= */
+        /* twin CTA buttons */
+        .hero .cta-wrapper{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+        .cta-button.secondary{background:#fff;color:var(--text-primary);}
+        .cta-button.secondary:hover{background:#f6f6f6;color:var(--text-primary);}
+
+        /* horizontal 4-step section */
+        .steps-horizontal{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2rem;margin-top:3rem;text-align:center}
+        .steps-horizontal .step-icon{font-size:2.5rem;margin-bottom:1rem}
+
+        /* audience grid (two rows) */
+        .audience-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-top:3rem;text-align:center}
+        .audience-item{background:rgba(255,255,255,.8);backdrop-filter:blur(10px);border-radius:18px;padding:2rem;box-shadow:var(--shadow-light);transition:.3s}
+        .audience-item:hover{transform:translateY(-6px)}
+        .audience-item .icon{font-size:2.8rem;margin-bottom:.8rem}
+
+        /* why-props (4) */
+        .why-props{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;margin-top:3rem;text-align:center}
+        .why-prop{background:rgba(255,255,255,.8);padding:2rem;border-radius:18px;box-shadow:var(--shadow-light);transition:.3s}
+        .why-prop:hover{transform:translateY(-6px)}
+        .why-prop .icon{font-size:2.5rem;margin-bottom:.8rem}
+
+        /* features list */
+        .features-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem}
+        .features-list li{list-style:none;background:rgba(255,255,255,.8);padding:1.5rem 1.8rem;border-radius:14px;box-shadow:var(--shadow-light)}
+        
+        /* ─── MODAL : hidden by default ───────────────────────────── */ 
+        #contactModal {display:none;} /* start closed */ 
+        #contactModal.open {display:flex !important;} /* show on demand */
+        #contactModal .close-modal{
+        position:absolute;top:16px;right:18px;
+        font-size:1.8rem;line-height:1;cursor:pointer;
+        color:#777;background:none;border:none;
+        }
+        
+        /* === enlarge the video in the “What is Vagari?” section ===================== */
+        @media (min-width: 1024px) {          /* desktop / tablets */
+        #what-is .image-content { flex: 2; }   /* video column 2-parts   */
+        #what-is .text-content  { flex: 1; }   /* text  column 1-part    */
+
+        #what-is .image-content video{
+            width: 100%;
+            max-width: none;                  /* remove the old 120 % cap */
+        }
+        #audience .audience-grid{
+            grid-template-columns: repeat(3, 1fr);   /* 3 columns */
+        }
+        
+        #visitor-app .image-content{
+            justify-content:center;          /* keep it nicely centred   */
+            }
+
+            #visitor-app .image-content video{
+            width:50%;                        /* ± half the original size */
+            max-width:340px;                  /* hard cap for large desks */
+            }}
+
+        @media (max-width:1024px){           /* phones / small tablets   */
+        #visitor-app .image-content video{
+            width:70%;                      /* a bit larger on small screens */
+        }
+        }
+        
+        .features-list{
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+        gap:1.8rem;
+        margin-top:3rem;
+        perspective:1000px;   
+        }
+        .feature-card{                     
+        list-style:none;
+        position:relative;
+        height:180px;                      
+        transform-style:preserve-3d;
+        transition:transform .8s cubic-bezier(.4,.2,.2,1);
+        border-radius:14px;
+        box-shadow:var(--shadow-light);
+        }
+        .feature-card:hover{
+        transform:rotateY(180deg);
+        }
+
+        /* two faces -------------------------------------------------*/
+        .feature-card .front,
+        .feature-card .back{
+        position:absolute;inset:0;
+        padding:1.6rem 1.8rem;
+        border-radius:14px;
+        display:flex;flex-direction:column;
+        justify-content:center;align-items:flex-start;
+        gap:.9rem;
+        backface-visibility:hidden;
+        align-items:center;
+        text-align:center;  
+        }
+        .feature-card .front{
+        background:rgba(255,255,255,.85);
+        }
+        .feature-card .back{
+        background:var(--accent-gradient);
+        color:#fff;
+        transform:rotateY(180deg);
+        }
+
+        /* icon sizes ----------------------------------------------*/
+        .feature-icon{font-size:2rem;line-height:1}
+        .feature-card .back .feature-icon{font-size:3.4rem;margin-bottom:.4rem}
+        .features-list{
+            display:grid;
+            gap:1.8rem;
+            grid-template-columns:repeat(auto-fill,minmax(260px,1fr));   /* 1-2 cards */
+        }
+
+        @media (min-width: 900px){      /* plenty of space ⇒ freeze at 3 */
+            .features-list{
+                grid-template-columns:repeat(3,1fr);
+            }
+        }
+        @media (max-width: 1024px){
+
+        /* generic two-column sections → stacked      */
+        .content-wrapper{
+        flex-direction: column;
+        gap: 2rem;
+        }
+
+        /* …except on #what-is, where the HTML order
+        (video first) has to be reversed           */
+        #what-is .content-wrapper{
+        flex-direction: column-reverse;
+        }
+
+        /* make the video really take the whole width */
+        .image-content,
+        .image-content video{
+        width: 100%;
+        max-width: none;          
+        }
+
+        /* nicer radius/shadow on small screens       */
+        .image-content video{
+        border-radius: 14px;
+        }
+
+        /* ---------- feature cards ----------------- */
+        .feature-card{                 
+        cursor: pointer;
+        }
+
+        /* disable the desktop hover on touch screens */
+        @media (hover:none){
+        .feature-card:hover{
+        transform: none;
+        }
+        }
+
+        /* the real flip will be done through JS
+        (class .flipped is toggled on tap)         */
+        .feature-card.flipped{
+        transform: rotateY(180deg);
+        }
+        }
+        /* ───────────────── HEADER : two compact buttons ─────────────── */
+        .header-banner .cta-group{display:flex;gap:.75rem;align-items:center}
+        .header-banner .cta-button{
+            background:var(--primary-gradient);            /* vivid gradient  */
+            color:#fff;                                    /* visible on white*/
+            font-size:.83rem;padding:.55rem 1.2rem;border:none;
+        }
+        .header-banner .cta-button:hover{
+            transform:translateY(-2px);box-shadow:0 8px 26px rgba(0,0,0,.18);
+        }
+        .header-banner .cta-button.secondary{              /* outlined version*/
+            background:transparent;border:1px solid var(--text-primary);
+            color:var(--text-primary);
+        }
+        .header-banner .cta-button.secondary:hover{
+            background:var(--text-primary);color:#fff;
+        }
+
+        /* ───────────────── stylish EN / ES switch ───────────────────── */
+        #language-switcher button{
+            background:none;border:none;cursor:pointer;
+            font-weight:600;font-size:.85rem;letter-spacing:.04em;
+            color:var(--text-primary);padding:.4rem .5rem;position:relative;
+        }
+        #language-switcher button::after{                  /* little underline*/
+            content:'';position:absolute;left:0;bottom:-2px;height:2px;width:100%;
+            background:var(--accent-gradient);transform:scaleX(0);
+            transform-origin:left;transition:transform .3s;
+        }
+        #language-switcher button:hover::after{transform:scaleX(1)}
+
+        /* ───────────────── prettier contact-form ─────────────────────── */
+        #contactModal .modal-content{max-width:500px;width:92%}        /* limit width */
+        #contactModal input,#contactModal textarea{
+            width:100%;padding:.85rem 1rem;margin-bottom:1rem;
+            border:1px solid #d0d0d0;border-radius:10px;font-size:1rem;
+            font-family:inherit;background:rgba(255,255,255,.9);
+        }
+        #contactModal button[type="submit"]{
+            width:100%;padding:1rem 0;border:none;border-radius:50px;
+            background:var(--primary-gradient);color:#fff;font-weight:600;
+            cursor:pointer;transition:.25s;
+        }
+        #contactModal button[type="submit"]:hover{
+            transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.18);
+        }
+
+        /* ───────── permanent, centred “Reach-out” form ───────── */
+        #contactModal{
+            position:fixed;        /* stay on screen even while scrolling    */
+            inset:0;               /* cover the whole viewport               */
+            align-items:center;
+            justify-content:center;
+            background:rgba(0,0,0,.25);          /* soft dim around the card */
+            z-index:3000;          /* above everything else                  */
+        }
+        #contactModal .modal-content{
+            margin:0 auto;         /* horizontal centring                    */
+        }
+
+        /* ─── INLINE form inside the last CTA ─────────────────────── */
+        .demo-inline-form{
+        max-width:540px;margin:3.5rem auto 0;
+        padding:2.2rem 2.4rem;
+        background:rgba(255,255,255,.85);
+        border-radius:18px;box-shadow:var(--shadow-light);
+        }
+        .demo-inline-form h3{margin-bottom:1.4rem;text-align:center}
+
+        .demo-inline-form input,
+        .demo-inline-form textarea{
+        width:100%;padding:.85rem 1rem;margin-bottom:1rem;
+        border:1px solid #d0d0d0;border-radius:10px;font-size:1rem;
+        font-family:inherit;background:rgba(255,255,255,.9);
+        }
+        .demo-inline-form button{
+        width:100%;padding:1rem 0;border:none;border-radius:50px;
+        background:var(--primary-gradient);color:#fff;font-weight:600;
+        cursor:pointer;transition:.25s;
+        }
+        .demo-inline-form button:hover{
+        transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.18);
+        }
+        /* ─── prettier “Ready to see it live?” area ─────────────────────────── */
+        .cta-section{
+            text-align:center;
+            padding:6rem 0;                      /* give the block some air     */
+        }
+
+        .cta-section h2{margin-bottom:.6rem;}    /* tighter title → subtitle    */
+
+        .cta-section p{                          /* subtitle itself             */
+            font-size:1.15rem;
+            margin-bottom:2.2rem;                /* distance from the button    */
+            color:var(--text-primary);
+        }
+
+        /* button now fully visible on the light background                    */
+        .cta-section .cta-button{
+            background:var(--primary-gradient);  /* vivid gradient              */
+            color:#fff;                          /* white ON purple = readable  */
+            border:none;
+        }
+
+        /* ─── real footer makeover ─────────────────────────────────────────── */
+        footer.footer{
+            background:var(--dark-gradient);     /* nice dark-blue gradient     */
+            color:var(--text-light);
+            padding:2.6rem 0;
+            text-align:center;
+        }
+
+        footer.footer .container{
+            display:flex;
+            flex-direction:column;
+            gap:.7rem;                           /* space between rows          */
+            align-items:center;
+        }
+
+        footer.footer .privacy-link{
+            color:var(--text-light);
+            text-decoration:none;
+            font-weight:500;
+            position:relative;
+        }
+
+        /* subtle animated underline on hover                                  */
+        footer.footer .privacy-link::after{
+            content:'';
+            position:absolute;
+            left:0; bottom:-4px;
+            width:100%; height:2px;
+            background:var(--accent-gradient);
+            transform:scaleX(0);
+            transform-origin:left;
+            transition:transform .3s;
+        }
+        footer.footer .privacy-link:hover::after{transform:scaleX(1);}
+        .nav-pricing{
+        font-weight:600;
+        font-size:.9rem;
+        letter-spacing:.04em;
+        color:var(--text-primary);
+        text-decoration:none;
+        margin-right:1.5rem;        /* pushes it away from the logo */
+        }
+        .nav-pricing:hover{opacity:.7}  /* tiny feedback, still “just text” */
+
+        /* 2 –– minimalist extra rules for the table below             */
+        .pricing-wrapper{
+            display:flex;flex-wrap:wrap;gap:2rem;justify-content:center
+        }
+        .plan-card{
+            flex:1 1 320px;max-width:420px;
+            background:rgba(255,255,255,.85);
+            padding:2.4rem 2rem;border-radius:18px;
+            box-shadow:var(--shadow-light);
+            display:flex;flex-direction:column;align-items:center
+        }
+        .plan-card h2{font-size:2rem;margin-bottom:.4rem}
+        .plan-card .price{
+            font-size:2.4rem;font-weight:700;margin:.8rem 0 1.6rem;
+            background:var(--primary-gradient);
+            -webkit-background-clip:text;background-clip:text;  -webkit-text-fill-color:transparent;
+        }
+        .plan-card ul{list-style:none;width:100%;margin-bottom:2rem}
+        .plan-card ul li{
+            display:flex;justify-content:space-between;
+            padding:.55rem 0;border-bottom:1px solid rgba(0,0,0,.05)
+        }
+        .plan-card .cta-button{width:100%}
+        #pricing h2::after{display:none}
+        .header-banner .brand{
+display:flex;              
+align-items:center;
+gap:1rem;                   
+text-decoration:none;       
 }
-.plan-card{
-    flex:1 1 320px;max-width:420px;
-    background:rgba(255,255,255,.85);
-    padding:2.4rem 2rem;border-radius:18px;
-    box-shadow:var(--shadow-light);
-    display:flex;flex-direction:column;align-items:center
+
+.header-banner .brand:hover{    
+opacity:.85;
 }
-.plan-card h2{font-size:2rem;margin-bottom:.4rem}
-.plan-card .price{
-    font-size:2.4rem;font-weight:700;margin:.8rem 0 1.6rem;
-    background:var(--primary-gradient);
-    -webkit-background-clip:text;background-clip:text;  -webkit-text-fill-color:transparent;
-}
-.plan-card ul{list-style:none;width:100%;margin-bottom:2rem}
-.plan-card ul li{
-    display:flex;justify-content:space-between;
-    padding:.55rem 0;border-bottom:1px solid rgba(0,0,0,.05)
-}
-.plan-card .cta-button{width:100%}
-</style>
+    </style>
 </head>
 
 <body>
 <!-- =================== identical header (with Planes link already in) ============= -->
-<header class="header-banner" id="header">…</header>
+<header class="header-banner" id="header">
+  <div class="container">
+    <div class="banner-content">
+      <!-- logo & brand --------------------------------------------------->
+      <a  href="/" class="brand">                     <!-- logo + name -->
+          <img src="/assets/logo.png" class="logo"  alt="Vagari logo">
+          <span class="company-name">Vagari</span>
+      </a>
+
+      <!-- TWO compact buttons ------------------------------------------->
+      <div class="cta-group">
+        <a href="/pricing.html"   class="nav-pricing">Planes</a>
+        <a  class="cta-button"
+            href="https://calendly.com/isidro-vagariknows/30min"
+            target="_blank" rel="noopener">Agenda demo</a>
+
+        <a  href="#"
+            class="cta-button secondary open-contact"
+            id="openModalHeader">Contáctanos</a>
+      </div>
+
+      <!-- small EN / ES switch ------------------------------------------>
+      <div id="language-switcher" style="position:fixed;top:10px;right:10px;">
+        <button id="switch-language">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
 
 <!-- =================== Pricing table ============================================= -->
 <section class="section" id="pricing">
@@ -55,17 +489,17 @@
 
         <ul>
           <li><span># Tours distribuidos</span><span>10</span></li>
-          <li><span>Batch-creation</span><span>✘</span></li>
-          <li><span>Rate limits</span><span>200 versiones/mes</span></li>
-          <li><span>Visitantes / mes</span><span>999</span></li>
+          <li><span>Creación simultánea</span><span>✘</span></li>
+          <li><span>Límites de uso</span><span>~999 versiones/mes</span></li>
+          <li><span>Visitantes / mes</span><span>199</span></li>
           <li><span>Itinerarios</span><span>✘</span></li>
           <li><span>FX & Música</span><span>✘</span></li>
-          <li><span>Analítica avanzada</span><span>✘</span></li>
+          <li><span>Analítica de visitante</span><span>✘</span></li>
         </ul>
 
         <a href="#"
            class="cta-button secondary open-contact"
-           data-subject="Free Trial">Acceso anticipado a prueba gratis</a>
+           data-subject="Free Trial">Prueba gratis</a>
       </div>
 
       <!-- ---------- ENTERPRISE ----------------------------------------- -->
@@ -74,17 +508,17 @@
         <p class="price" style="visibility:hidden">–</p><!-- keeps cards equal height -->
 
         <ul>
-          <li><span># Tours distribuidos</span><span>Unlimited</span></li>
-          <li><span>Batch-creation</span><span>Sí</span></li>
-          <li><span>Rate limits</span><span>Ilimitado</span></li>
-          <li><span>Visitantes / mes</span><span>Ilimitado</span></li>
-          <li><span>Itinerarios</span><span>Sí</span></li>
-          <li><span>FX & Música</span><span>Sí</span></li>
-          <li><span>Analítica avanzada</span><span>Sí</span></li>
+          <li><span># Tours distribuidos</span><span>Sin límites</span></li>
+          <li><span>Creación simultánea</span><span>✓</span></li>
+          <li><span>Límites de uso</span><span>Sin límites</span></li>
+          <li><span>Visitantes / mes</span><span>Sin límites</span></li>
+          <li><span>Itinerarios</span><span>✓</span></li>
+          <li><span>FX & Música</span><span>✓</span></li>
+          <li><span>Analítica avanzada</span><span>✓</span></li>
         </ul>
 
         <a href="#"
-           class="cta-button open-contact"
+           class="cta-button secondary open-contact"
            data-subject="Enterprise">Contáctanos</a>
       </div>
 
@@ -93,11 +527,85 @@
 </section>
 
 <!-- footer + the very same modal you already have ================================ -->
-<footer class="footer">…</footer>
+<div id="contactModal" class="modal">
+    <div class="modal-content">
+        <button class="close-modal" aria-label="Close">&times;</button>
+        <h2>Contact us</h2>
+        <form action="https://formspree.io/f/xvgraeoa" method="POST">
+            <p style="text-align:center;margin-top:1rem;color:#666;font-size:.9rem;">Share your contact info and we'll reach out in 24 hours</p>
+            <input type="hidden" name="subject" id="form-subject" value="">
+            <input type="text" name="name"     placeholder="Name"     required>
+            <input type="text" name="surname"  placeholder="Surname"  required>
+            <input type="email" name="email"   placeholder="Email"    required>
+            <input type="text" name="entity"   placeholder="Entity"   required>
+            <input type="text" name="role"     placeholder="Role">
+            <textarea name="message" placeholder="Message" style="width:100%;padding:.8rem;margin-bottom:1rem;border:1px solid #ccc;border-radius:8px;font-size:1rem;min-height:100px;resize:vertical;font-family:inherit;"></textarea>
+            <button type="submit">Send</button>
+            <p style="text-align:center;margin-top:1rem;color:#666;font-size:.9rem;">Or email us at isidro@vagariknows.com</p>
+        </form>
+    </div>
+</div>
+
+<footer class="footer" id="contact">
+    <div class="container">
+        <p>&copy; 2025 Vagari.</p>
+    </div>
+</footer>
 
 <!-- ================ Script: identical to main, two extra tiny lines ============== -->
 <script>
-/* (copy the WHOLE <script> block from index.html) */
+    // scroll progress bar
+    window.addEventListener('scroll',()=>{
+        const scrollTop=window.pageYOffset;
+        const docHeight=document.body.offsetHeight;
+        const winHeight=window.innerHeight;
+        const percent=Math.round((scrollTop/(docHeight-winHeight))*100);
+        document.getElementById('scrollProgress').style.width=percent+'%';
+    });
+
+    // sticky header shade
+    window.addEventListener('scroll',()=>{
+        const header=document.getElementById('header');
+        if(window.scrollY>100)header.classList.add('scrolled');else header.classList.remove('scrolled');
+    });
+
+    // reveal sections on scroll
+    const observer=new IntersectionObserver((entries)=>{
+        entries.forEach((entry,i)=>{
+            if(entry.isIntersecting)setTimeout(()=>entry.target.classList.add('visible'),i*200);
+        });
+    },{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+    document.querySelectorAll('.section').forEach(sec=>observer.observe(sec));
+
+    /*  ripple effect, hero parallax, keyboard nav etc. – leave exactly as in your old file */
+    document.querySelectorAll('.feature-card').forEach(card=>{
+        card.addEventListener('click',()=>card.classList.toggle('flipped'));
+        });
+
+    /* ─── pop-up open / close logic ───────────────────────────── */
+    const contactModal   = document.getElementById('contactModal');
+    const openButtons    = document.querySelectorAll('.open-contact');
+    const closeBtn       = contactModal.querySelector('.close-modal');
+
+    /* open on any “Book a demo / Get in touch” click */
+    openButtons.forEach(btn => btn.addEventListener('click', e =>{
+    e.preventDefault();                 // stay on the page
+    contactModal.classList.add('open'); // show modal
+    document.body.style.overflow='hidden';   // stop background scroll
+    }));
+
+    /* close with the X */
+    closeBtn.addEventListener('click', () => closeModal());
+
+    /* close by clicking the shaded backdrop (but not the card) */
+    contactModal.addEventListener('click', e =>{
+    if (e.target === contactModal) closeModal();
+    });
+
+    function closeModal(){
+    contactModal.classList.remove('open');
+    document.body.style.overflow='';    // restore scroll
+    }
 
 /* two additions so the subject goes into the hidden field before opening */
 const hiddenSubj = document.getElementById('form-subject');     // ①
