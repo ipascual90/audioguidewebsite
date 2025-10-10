@@ -401,7 +401,15 @@
         transition:transform .3s;
     }
     footer.footer .privacy-link:hover::after{transform:scaleX(1);}
-        
+    .nav-pricing{
+    font-weight:600;
+    font-size:.9rem;
+    letter-spacing:.04em;
+    color:var(--text-primary);
+    text-decoration:none;
+    margin-right:1.5rem;        /* pushes it away from the logo */
+    }
+    .nav-pricing:hover{opacity:.7}  /* tiny feedback, still “just text” */
     </style>
 </head>
 
@@ -419,6 +427,8 @@
         <img src="/assets/logo.png" class="logo" alt="Vagari logo">
         <a class="company-name" href="#">Vagari</a>
       </div>
+
+      <a href="/en/pricing.html" class="nav-pricing">Pricing</a>
 
       <!-- TWO compact buttons ------------------------------------------->
       <div class="cta-group">
@@ -713,6 +723,7 @@
         </div>
     </div>
     <form action="https://formspree.io/f/xvgraeoa" method="POST" class="demo-inline-form"> <h3>Contact us</h3>
+        <input type="hidden" name="subject" id="form-subject" value="">
         <input type="text"   name="name"     placeholder="Name"     required>
         <input type="text"   name="surname"  placeholder="Surname"  required>
         <input type="email"  name="email"    placeholder="Email"    required>
@@ -734,6 +745,7 @@
         <h2>Contact us</h2>
         <form action="https://formspree.io/f/xvgraeoa" method="POST">
             <p style="text-align:center;margin-top:1rem;color:#666;font-size:.9rem;">Share your contact info and we'll reach out in 24 hours</p>
+            <input type="hidden" name="subject" id="form-subject" value="">
             <input type="text" name="name"     placeholder="Name"     required>
             <input type="text" name="surname"  placeholder="Surname"  required>
             <input type="email" name="email"   placeholder="Email"    required>

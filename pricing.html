@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Planes y precios | Vagari</title>
+
+<!-- Google font + the whole main stylesheet you already have -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* 1 –– copy the COMPLETE <style> block from index.html here … */
+/* … nothing to change …                                       */
+
+/* 2 –– minimalist extra rules for the table below             */
+.pricing-wrapper{
+    display:flex;flex-wrap:wrap;gap:2rem;justify-content:center
+}
+.plan-card{
+    flex:1 1 320px;max-width:420px;
+    background:rgba(255,255,255,.85);
+    padding:2.4rem 2rem;border-radius:18px;
+    box-shadow:var(--shadow-light);
+    display:flex;flex-direction:column;align-items:center
+}
+.plan-card h2{font-size:2rem;margin-bottom:.4rem}
+.plan-card .price{
+    font-size:2.4rem;font-weight:700;margin:.8rem 0 1.6rem;
+    background:var(--primary-gradient);
+    -webkit-background-clip:text;background-clip:text;  -webkit-text-fill-color:transparent;
+}
+.plan-card ul{list-style:none;width:100%;margin-bottom:2rem}
+.plan-card ul li{
+    display:flex;justify-content:space-between;
+    padding:.55rem 0;border-bottom:1px solid rgba(0,0,0,.05)
+}
+.plan-card .cta-button{width:100%}
+</style>
+</head>
+
+<body>
+<!-- =================== identical header (with Planes link already in) ============= -->
+<header class="header-banner" id="header">…</header>
+
+<!-- =================== Pricing table ============================================= -->
+<section class="section" id="pricing">
+  <div class="container">
+    <h2 style="text-align:center">Nuestros planes</h2>
+
+    <div class="pricing-wrapper">
+
+      <!-- ---------- ONE ------------------------------------------------ -->
+      <div class="plan-card">
+        <h2>One</h2>
+        <p class="price">99 € / mes</p>
+
+        <ul>
+          <li><span># Tours distribuidos</span><span>10</span></li>
+          <li><span>Batch-creation</span><span>✘</span></li>
+          <li><span>Rate limits</span><span>200 versiones/mes</span></li>
+          <li><span>Visitantes / mes</span><span>999</span></li>
+          <li><span>Itinerarios</span><span>✘</span></li>
+          <li><span>FX & Música</span><span>✘</span></li>
+          <li><span>Analítica avanzada</span><span>✘</span></li>
+        </ul>
+
+        <a href="#"
+           class="cta-button secondary open-contact"
+           data-subject="Free Trial">Acceso anticipado a prueba gratis</a>
+      </div>
+
+      <!-- ---------- ENTERPRISE ----------------------------------------- -->
+      <div class="plan-card">
+        <h2>Enterprise</h2>
+        <p class="price" style="visibility:hidden">–</p><!-- keeps cards equal height -->
+
+        <ul>
+          <li><span># Tours distribuidos</span><span>Unlimited</span></li>
+          <li><span>Batch-creation</span><span>Sí</span></li>
+          <li><span>Rate limits</span><span>Ilimitado</span></li>
+          <li><span>Visitantes / mes</span><span>Ilimitado</span></li>
+          <li><span>Itinerarios</span><span>Sí</span></li>
+          <li><span>FX & Música</span><span>Sí</span></li>
+          <li><span>Analítica avanzada</span><span>Sí</span></li>
+        </ul>
+
+        <a href="#"
+           class="cta-button open-contact"
+           data-subject="Enterprise">Contáctanos</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- footer + the very same modal you already have ================================ -->
+<footer class="footer">…</footer>
+
+<!-- ================ Script: identical to main, two extra tiny lines ============== -->
+<script>
+/* (copy the WHOLE <script> block from index.html) */
+
+/* two additions so the subject goes into the hidden field before opening */
+const hiddenSubj = document.getElementById('form-subject');     // ①
+
+openButtons.forEach(btn => btn.addEventListener('click', e =>{
+    e.preventDefault();
+    contactModal.classList.add('open');
+    document.body.style.overflow='hidden';
+
+    /* ② set subject if the button carries one */
+    hiddenSubj.value = btn.dataset.subject || '';
+}));
+</script>
+</body>
+</html>
