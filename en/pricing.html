@@ -441,6 +441,19 @@ text-decoration:none;
 .header-banner .brand:hover{     /* optional tiny feedback like on home   */
 opacity:.85;
 }
+.plan-card.project{                 /* extra air to the right  */
+    margin-right:4rem;              /* ≈ double the normal gap */
+}
+.plan-card .maintenance{            /* tiny secondary line     */
+    font-size:1.05rem;
+    font-weight:500;
+    margin-top:-1rem;
+    margin-bottom:1.6rem;
+    color:#555;
+}
+@media(max-width:700px){            /* stack ⇒ cancel spacing  */
+    .plan-card.project{margin-right:0;}
+}
 </style>
 </head>
 
@@ -480,6 +493,24 @@ opacity:.85;
     <h2 style="text-align:center">Our plans</h2>
 
     <div class="pricing-wrapper">
+        <div class="plan-card project">
+            <h2>Done-for-You</h2>
+            <p class="price">$ 1 900 one-off</p>
+            <p class="maintenance">+ $ 290 / year maintenance</p>
+
+            <ul>
+                <li><span># Tours delivered</span><span>Up to 15</span></li>
+                <li><span>We create & mix audio</span><span>✓</span></li>
+                <li><span>Hosted in Vagari Web-app</span><span>✓</span></li>
+                <li><span>Unlimited visitors</span><span>✓</span></li>
+                <li><span>Future edits</span><span>On demand</span></li>
+                <li><span>User analytics</span><span>✓</span></li>
+            </ul>
+
+            <a href="#"
+                class="cta-button secondary open-contact"
+                data-subject="Done-for-You Project">Request a proposal</a>
+            </div>
 
       <!-- ---------- ONE ------------------------------------------------ -->
       <div class="plan-card">
