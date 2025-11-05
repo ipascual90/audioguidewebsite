@@ -420,7 +420,7 @@
         }
         .plan-card h2{font-size:2rem;margin-bottom:.4rem}
         .plan-card .price{
-            font-size:2.4rem;font-weight:700;margin:.8rem 0 1.6rem;
+            font-size:1.8rem;font-weight:700;margin:.8rem 0 1.6rem;
             background:var(--primary-gradient);
             -webkit-background-clip:text;background-clip:text;  -webkit-text-fill-color:transparent;
         }
@@ -440,6 +440,19 @@ text-decoration:none;
 
 .header-banner .brand:hover{    
 opacity:.85;
+}
+.plan-card.project{                 /* extra air to the right  */
+    margin-right:4rem;              /* ≈ double the normal gap */
+}
+.plan-card .maintenance{            /* tiny secondary line     */
+    font-size:1.05rem;
+    font-weight:500;
+    margin-top:-1rem;
+    margin-bottom:1.6rem;
+    color:#555;
+}
+@media(max-width:700px){            /* stack ⇒ cancel spacing  */
+    .plan-card.project{margin-right:0;}
 }
     </style>
 </head>
@@ -481,6 +494,26 @@ opacity:.85;
     <h2 style="text-align:center">Nuestros planes</h2>
 
     <div class="pricing-wrapper">
+        <div class="plan-card project">
+            <h2>Llave en mano</h2>
+            <p class="price">€ 1 900 pago único</p>
+            <p class="maintenance">+ € 290 / año mantenimiento</p>
+
+            <ul>
+                <li><span># Tours </span><span>Hasta 15</span></li>
+                <li><span>Idiomas gratis</span><span>4, hasta 40 bajo pedido</span></li>
+                <li><span>Plazo</span><span>4 días!</span></li>
+                <li><span>Creamos guiones y audio por tí</span><span>✓</span></li>
+                <li><span>Alojamos en nuestra web app</span><span>✓</span></li>
+                <li><span>Visitantes ilimitados</span><span>✓</span></li>
+                <li><span>Modificaciones futuras</span><span>Bajo pedido</span></li>
+                <li><span>Analítica de usuarios</span><span>✓</span></li>
+            </ul>
+
+            <a href="#"
+                class="cta-button secondary open-contact"
+                data-subject="Done-for-You Project">Contáctanos</a>
+        </div>
 
       <!-- ---------- ONE ------------------------------------------------ -->
       <div class="plan-card">
