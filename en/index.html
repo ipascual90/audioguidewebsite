@@ -535,9 +535,21 @@
         display:inline-block;
         align-self:flex-start;
     }
+    /* Case study screenshot - no container, transparent fusion with background */
+    .case-study-screenshot{
+        width:130%;
+        max-width:none;
+        height:auto;
+        background:transparent;
+        /* no border-radius, no box-shadow on purpose */
+    }
+
     @media(max-width:1024px){
         .case-study-stats{
             justify-content:center;
+        }
+        .case-study-screenshot{
+        width:110%;
         }
         .case-study-cta{
             align-self:center;
@@ -662,8 +674,8 @@
             <!-- Screenshot / phone mockup -->
             <div class="image-content">
                 <img src="/assets/screenshotsEspai.png"
-                     alt="Museum visitor app screenshot"
-                     style="max-width:100%;border-radius:20px;box-shadow:var(--shadow-heavy);">
+                    alt="Museum visitor app screenshot"
+                    class="case-study-screenshot">
             </div>
 
             <!-- Text side -->
