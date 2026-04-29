@@ -436,6 +436,7 @@
                 height: auto;
                 padding-left: 2rem;
             }
+            .visitor-screenshots-mobile { display: none; }
         }
 
         /* ============================================================
@@ -501,6 +502,22 @@
             /* but visitor-app screenshot looks nicer a bit smaller */
             #visitor-app .image-content img{
                 width:100%;
+            }
+            .visitor-screenshot-desktop { display: none; }
+
+            .visitor-screenshots-mobile {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                width: 100%;
+                align-items: center;
+            }
+            .visitor-screenshots-mobile img {
+                width: 100%;
+                max-width: 420px;
+                height: auto;
+                border-radius: 18px;
+                box-shadow: var(--shadow-light);
             }
 
             .image-content video{
@@ -614,7 +631,17 @@
                 </p>
             </div>
             <div class="image-content">
-                <img src="/assets/screenshotsEspai.png" alt="Museum visitor app screenshot">
+                <!-- Desktop: combined screenshot -->
+                <img src="/assets/screenshotsEspai.png"
+                    alt="Museum visitor app screenshot"
+                    class="visitor-screenshot-desktop">
+
+                <!-- Mobile: three separate screenshots, stacked -->
+                <div class="visitor-screenshots-mobile">
+                    <img src="/assets/audioScreenshotEnglish.png" alt="Visitor app screenshot 1">
+                    <img src="/assets/quizzScreenshotEnglish.png" alt="Visitor app screenshot 2">
+                    <img src="/assets/chatbotScreenshotEnglish.png" alt="Visitor app screenshot 3">
+                </div>
             </div>
         </div>
     </div>
