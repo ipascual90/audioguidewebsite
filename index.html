@@ -8,9 +8,6 @@
     <!-- fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- =========================================================================================
-         ORIGINAL  FULL  STYLE  (unchanged)  –  copy-pasted from the code you sent
-    ========================================================================================= -->
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -37,7 +34,7 @@
 
         .container{max-width:1200px;margin:0 auto;padding:0 20px;}
 
-        /* ----- header  (glass morphism) ------------------------------------------------ */
+        /* ----- header ------------------------------------------------ */
         .header-banner{
             background:rgba(255,255,255,0.25);
             backdrop-filter:blur(10px);
@@ -57,7 +54,7 @@
         .company-name{font-size:2rem;font-weight:600;letter-spacing:.05em;background:var(--primary-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none;transition:.3s}
         .company-name:hover{transform:translateY(-2px);filter:drop-shadow(0 4px 8px rgba(102,126,234,.3));}
 
-        /* ----- hero -------------------------------------------------------------------- */
+        /* ----- hero ------------------------------------------------- */
         .hero{
             min-height:100vh;display:flex;align-items:center;
             background:url('/assets/heroPhoto.jpg') center/cover no-repeat;
@@ -79,7 +76,7 @@
         .cta-button:hover::before{left:100%}
         .cta-button:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.3);background:rgba(255,255,255,.3);}
 
-        /* ----- generic content sections ------------------------------------------------- */
+        /* ----- generic content sections ----------------------------- */
         .section{padding:8rem 0;opacity:0;transform:translateY(50px);transition:all 1.2s cubic-bezier(.25,.46,.45,.94);position:relative;}
         .section.visible{opacity:1;transform:translateY(0);}
         .section:nth-child(even){background:linear-gradient(135deg,#f8f9fa 0%,#e9ecef 100%);}
@@ -93,14 +90,6 @@
         .image-content img, .image-content video{max-width:120%;height:auto;transition:.3s;}
         .image-content:hover img, .image-content:hover video{transform:scale(1.05) rotateY(5deg);}
 
-        /* ----- remaining   MANY  rules (value-props, how-it-works, footer, ripple, …)
-           keep them exactly as they were in your previous file …                    */
-        /* … (omitted here for brevity of this explanation – your current file already
-              has them; just leave them untouched)                                   */
-
-        /* =================================================================================
-           NEW small rules required by the fresh sections / buttons (appended at the end)
-           ================================================================================= */
         /* twin CTA buttons */
         .hero .cta-wrapper{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
         .cta-button.secondary{background:#fff;color:var(--text-primary);}
@@ -110,326 +99,474 @@
         .steps-horizontal{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2rem;margin-top:3rem;text-align:center}
         .steps-horizontal .step-icon{font-size:2.5rem;margin-bottom:1rem}
 
-        /* audience grid (two rows) */
+        /* audience grid */
         .audience-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-top:3rem;text-align:center}
         .audience-item{background:rgba(255,255,255,.8);backdrop-filter:blur(10px);border-radius:18px;padding:2rem;box-shadow:var(--shadow-light);transition:.3s}
         .audience-item:hover{transform:translateY(-6px)}
         .audience-item .icon{font-size:2.8rem;margin-bottom:.8rem}
 
-        /* why-props (4) */
+        /* why-props */
         .why-props{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;margin-top:3rem;text-align:center}
         .why-prop{background:rgba(255,255,255,.8);padding:2rem;border-radius:18px;box-shadow:var(--shadow-light);transition:.3s}
         .why-prop:hover{transform:translateY(-6px)}
         .why-prop .icon{font-size:2.5rem;margin-bottom:.8rem}
 
         /* features list */
-        .features-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem}
-        .features-list li{list-style:none;background:rgba(255,255,255,.8);padding:1.5rem 1.8rem;border-radius:14px;box-shadow:var(--shadow-light)}
-        
-        /* ─── MODAL : hidden by default ───────────────────────────── */ 
-        #contactModal {display:none;} /* start closed */ 
-        #contactModal.open {display:flex !important;} /* show on demand */
-        #contactModal .close-modal{
-        position:absolute;top:16px;right:18px;
-        font-size:1.8rem;line-height:1;cursor:pointer;
-        color:#777;background:none;border:none;
-        }
-        
-        /* === enlarge the video in the “What is Vagari?” section ===================== */
-        @media (min-width: 1024px) {          /* desktop / tablets */
-        #what-is .image-content { flex: 2; }   /* video column 2-parts   */
-        #what-is .text-content  { flex: 1; }   /* text  column 1-part    */
-
-        #what-is .image-content video{
-            width: 100%;
-            max-width: none;                  /* remove the old 120 % cap */
-        }
-        #audience .audience-grid{
-            grid-template-columns: repeat(3, 1fr);   /* 3 columns */
-        }
-        
-        #visitor-app .image-content{
-            justify-content:center;          /* keep it nicely centred   */
-            }
-
-            #visitor-app .image-content video{
-            width:50%;                        /* ± half the original size */
-            max-width:340px;                  /* hard cap for large desks */
-            }}
-
-        @media (max-width:1024px){           /* phones / small tablets   */
-        #visitor-app .image-content video{
-            width:70%;                      /* a bit larger on small screens */
-        }
-        }
-        
-        .features-list{
-        display:grid;
-        grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-        gap:1.8rem;
-        margin-top:3rem;
-        perspective:1000px;   
-        }
-        .feature-card{                     
-        list-style:none;
-        position:relative;
-        height:180px;                      
-        transform-style:preserve-3d;
-        transition:transform .8s cubic-bezier(.4,.2,.2,1);
-        border-radius:14px;
-        box-shadow:var(--shadow-light);
-        }
-        .feature-card:hover{
-        transform:rotateY(180deg);
-        }
-
-        /* two faces -------------------------------------------------*/
-        .feature-card .front,
-        .feature-card .back{
-        position:absolute;inset:0;
-        padding:1.6rem 1.8rem;
-        border-radius:14px;
-        display:flex;flex-direction:column;
-        justify-content:center;align-items:flex-start;
-        gap:.9rem;
-        backface-visibility:hidden;
-        align-items:center;
-        text-align:center;  
-        }
-        .feature-card .front{
-        background:rgba(255,255,255,.85);
-        }
-        .feature-card .back{
-        background:var(--accent-gradient);
-        color:#fff;
-        transform:rotateY(180deg);
-        }
-
-        /* icon sizes ----------------------------------------------*/
-        .feature-icon{font-size:2rem;line-height:1}
-        .feature-card .back .feature-icon{font-size:3.4rem;margin-bottom:.4rem}
         .features-list{
             display:grid;
             gap:1.8rem;
-            grid-template-columns:repeat(auto-fill,minmax(260px,1fr));   /* 1-2 cards */
+            grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+            margin-top:3rem;
+            perspective:1000px;
+        }
+        @media (min-width: 900px){
+            .features-list{grid-template-columns:repeat(3,1fr);}
+        }
+        .feature-card{
+            list-style:none;
+            position:relative;
+            height:180px;
+            transform-style:preserve-3d;
+            transition:transform .8s cubic-bezier(.4,.2,.2,1);
+            border-radius:14px;
+            box-shadow:var(--shadow-light);
+        }
+        .feature-card:hover{transform:rotateY(180deg);}
+        .feature-card.flipped{transform:rotateY(180deg);}
+        .feature-card .front,
+        .feature-card .back{
+            position:absolute;inset:0;
+            padding:1.6rem 1.8rem;
+            border-radius:14px;
+            display:flex;flex-direction:column;
+            justify-content:center;align-items:center;
+            gap:.9rem;
+            backface-visibility:hidden;
+            text-align:center;
+        }
+        .feature-card .front{background:rgba(255,255,255,.85);}
+        .feature-card .back{
+            background:var(--accent-gradient);
+            color:#fff;
+            transform:rotateY(180deg);
+        }
+        .feature-icon{font-size:2rem;line-height:1}
+        .feature-card .back .feature-icon{font-size:3.4rem;margin-bottom:.4rem}
+
+        @media (hover:none){
+            .feature-card:hover{transform:none;}
+            .feature-card.flipped{transform:rotateY(180deg);}
         }
 
-        @media (min-width: 900px){      /* plenty of space ⇒ freeze at 3 */
-            .features-list{
-                grid-template-columns:repeat(3,1fr);
+        /* MODAL */
+        #contactModal {display:none;}
+        #contactModal.open {display:flex !important;}
+        #contactModal .close-modal{
+            position:absolute;top:16px;right:18px;
+            font-size:1.8rem;line-height:1;cursor:pointer;
+            color:#777;background:none;border:none;
+        }
+        #contactModal{
+            position:fixed;
+            inset:0;
+            align-items:center;
+            justify-content:center;
+            background:rgba(0,0,0,.25);
+            z-index:3000;
+        }
+        #contactModal .modal-content{max-width:500px;width:92%;margin:0 auto;background:#fff;padding:2rem;border-radius:18px;position:relative;}
+        #contactModal input,#contactModal textarea{
+            width:100%;padding:.85rem 1rem;margin-bottom:1rem;
+            border:1px solid #d0d0d0;border-radius:10px;font-size:1rem;
+            font-family:inherit;background:rgba(255,255,255,.9);
+        }
+        #contactModal button[type="submit"]{
+            width:100%;padding:1rem 0;border:none;border-radius:50px;
+            background:var(--primary-gradient);color:#fff;font-weight:600;
+            cursor:pointer;transition:.25s;
+        }
+        #contactModal button[type="submit"]:hover{
+            transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.18);
+        }
+
+        /* HEADER buttons */
+        .header-banner .cta-group{display:flex;gap:.75rem;align-items:center}
+        .header-banner .cta-button{
+            background:var(--primary-gradient);
+            color:#fff;
+            font-size:.83rem;padding:.55rem 1.2rem;border:none;
+        }
+        .header-banner .cta-button:hover{
+            transform:translateY(-2px);box-shadow:0 8px 26px rgba(0,0,0,.18);
+        }
+        .header-banner .cta-button.secondary{
+            background:transparent;border:1px solid var(--text-primary);
+            color:var(--text-primary);
+        }
+        .header-banner .cta-button.secondary:hover{
+            background:var(--text-primary);color:#fff;
+        }
+
+        /* language switch */
+        #language-switcher button{
+            background:none;border:none;cursor:pointer;
+            font-weight:600;font-size:.85rem;letter-spacing:.04em;
+            color:var(--text-primary);padding:.4rem .5rem;position:relative;
+        }
+        #language-switcher button::after{
+            content:'';position:absolute;left:0;bottom:-2px;height:2px;width:100%;
+            background:var(--accent-gradient);transform:scaleX(0);
+            transform-origin:left;transition:transform .3s;
+        }
+        #language-switcher button:hover::after{transform:scaleX(1)}
+
+        /* inline form */
+        .demo-inline-form{
+            max-width:540px;margin:3.5rem auto 0;
+            padding:2.2rem 2.4rem;
+            background:rgba(255,255,255,.85);
+            border-radius:18px;box-shadow:var(--shadow-light);
+        }
+        .demo-inline-form h3{margin-bottom:1.4rem;text-align:center}
+        .demo-inline-form input,
+        .demo-inline-form textarea{
+            width:100%;padding:.85rem 1rem;margin-bottom:1rem;
+            border:1px solid #d0d0d0;border-radius:10px;font-size:1rem;
+            font-family:inherit;background:rgba(255,255,255,.9);
+        }
+        .demo-inline-form button{
+            width:100%;padding:1rem 0;border:none;border-radius:50px;
+            background:var(--primary-gradient);color:#fff;font-weight:600;
+            cursor:pointer;transition:.25s;
+        }
+        .demo-inline-form button:hover{
+            transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.18);
+        }
+
+        /* CTA section */
+        .cta-section{text-align:center;padding:6rem 0;}
+        .cta-section h2{margin-bottom:.6rem;}
+        .cta-section p{font-size:1.15rem;margin-bottom:2.2rem;color:var(--text-primary);}
+        .cta-section .cta-button{
+            background:var(--primary-gradient);
+            color:#fff;
+            border:none;
+        }
+
+        /* footer */
+        footer.footer{
+            background:var(--dark-gradient);
+            color:var(--text-light);
+            padding:2.6rem 0;
+            text-align:center;
+        }
+        footer.footer .container{
+            display:flex;
+            flex-direction:column;
+            gap:.7rem;
+            align-items:center;
+        }
+        footer.footer .privacy-link{
+            color:var(--text-light);
+            text-decoration:none;
+            font-weight:500;
+            position:relative;
+        }
+        footer.footer .privacy-link::after{
+            content:'';
+            position:absolute;
+            left:0; bottom:-4px;
+            width:100%; height:2px;
+            background:var(--accent-gradient);
+            transform:scaleX(0);
+            transform-origin:left;
+            transition:transform .3s;
+        }
+        footer.footer .privacy-link:hover::after{transform:scaleX(1);}
+        .nav-pricing{
+            font-weight:600;
+            font-size:.9rem;
+            letter-spacing:.04em;
+            color:var(--text-primary);
+            text-decoration:none;
+            margin-right:1.5rem;
+        }
+        .nav-pricing:hover{opacity:.7}
+
+        /* HERO credential strip */
+        .hero-credential{
+            margin-top:3.5rem;
+            padding-top:1.8rem;
+            border-top:1px solid rgba(255,255,255,.25);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:1.5rem;
+            max-width:720px;
+            margin-inline:auto;
+            flex-wrap:wrap;
+        }
+        .hero-credential .credential-logo{
+            height:44px;
+            width:auto;
+            opacity:.85;
+        }
+        .hero-credential .credential-quote{
+            color:rgba(255,255,255,.9);
+            font-size:.95rem;
+            line-height:1.5;
+            font-style:italic;
+            text-shadow:0 2px 10px rgba(0,0,0,.25);
+            margin:0;
+            text-align:left;
+            max-width:460px;
+        }
+        .hero-credential .credential-author{
+            display:block;
+            font-style:normal;
+            font-size:.8rem;
+            opacity:.75;
+            margin-top:.3rem;
+            letter-spacing:.02em;
+        }
+
+        /* CASE STUDY */
+        .case-study-wrapper{align-items:center;}
+        .case-study-header{
+            display:flex;
+            align-items:center;
+            gap:1rem;
+            margin-bottom:1.5rem;
+        }
+        .case-study-logo{
+            height:56px;
+            width:auto;
+            border-radius:8px;
+            box-shadow:var(--shadow-light);
+            flex-shrink:0;
+        }
+        .case-study-header h3{
+            font-size:1.4rem;
+            font-weight:600;
+            margin-bottom:.2rem;
+            color:var(--text-primary);
+        }
+        .case-study-context{
+            font-size:.95rem;
+            color:#666;
+            margin:0;
+        }
+        .case-study-quote{
+            font-size:1.15rem;
+            line-height:1.6;
+            font-style:italic;
+            color:var(--text-primary);
+            border-left:4px solid;
+            border-image:var(--primary-gradient) 1;
+            padding:.6rem 0 .6rem 1.4rem;
+            margin:0 0 1.8rem 0;
+        }
+        .case-study-quote footer{
+            display:block;
+            font-style:normal;
+            font-size:.9rem;
+            color:#777;
+            margin-top:.8rem;
+            font-weight:500;
+            background:none;
+            padding:0;
+        }
+        .case-study-stats{
+            display:flex;
+            gap:2rem;
+            margin-bottom:2rem;
+            flex-wrap:wrap;
+        }
+        .case-study-stats .stat{
+            display:flex;
+            flex-direction:column;
+        }
+        .case-study-stats .stat-number{
+            font-size:2.2rem;
+            font-weight:700;
+            background:var(--primary-gradient);
+            -webkit-background-clip:text;
+            background-clip:text;
+            -webkit-text-fill-color:transparent;
+            line-height:1;
+        }
+        .case-study-stats .stat-label{
+            font-size:.85rem;
+            color:#666;
+            margin-top:.3rem;
+            text-transform:uppercase;
+            letter-spacing:.05em;
+        }
+        .case-study-cta{
+            background:var(--primary-gradient) !important;
+            color:#fff !important;
+            border:none !important;
+            display:inline-block;
+            align-self:flex-start;
+        }
+        .case-study-screenshot{
+            width:50%;
+            max-width:none;
+            height:auto;
+            background:transparent;
+        }
+
+        /* ============================================================
+           DESKTOP-only overrides (≥1025px)
+           ============================================================ */
+        @media (min-width: 1025px) {
+            #what-is .image-content { flex: 2; }
+            #what-is .text-content  { flex: 1; }
+            #what-is .image-content video{
+                width: 100%;
+                max-width: none;
             }
+            #audience .audience-grid{
+                grid-template-columns: repeat(3, 1fr);
+            }
+            #visitor-app .text-content  { flex: 1; }
+            #visitor-app .image-content { flex: 2; }
+            #visitor-app .image-content img {
+                width: 100%;
+                height: auto;
+                padding-left: 2rem;
+            }
+            .visitor-screenshots-mobile { display: none; }
         }
-        @media (max-width: 1024px){
 
-/* generic two-column sections → stacked      */
-    .content-wrapper{
-    flex-direction: column;
-    gap: 2rem;
-    }
+        /* ============================================================
+           MOBILE / TABLET overrides (≤1024px)
+           ============================================================ */
+        @media (max-width: 1024px) {
 
-    /* …except on #what-is, where the HTML order
-    (video first) has to be reversed           */
-    #what-is .content-wrapper{
-    flex-direction: column-reverse;
-    }
+            .section{padding:5rem 0;}
 
-    /* make the video really take the whole width */
-    .image-content,
-    .image-content video{
-    width: 100%;
-    max-width: none;          
-    }
+            .banner-content{flex-wrap:wrap;gap:.6rem;}
+            .logo{height:40px;}
+            .company-name{font-size:1.5rem;}
+            .header-banner .cta-button{font-size:.75rem;padding:.45rem .9rem;}
+            #language-switcher{position:static !important;}
 
-    /* nicer radius/shadow on small screens       */
-    .image-content video{
-    border-radius: 14px;
-    }
+            .hero{min-height:auto;padding:6rem 0 4rem;}
+            .hero h1{font-size:2rem;}
+            .hero .subtitle{font-size:1.05rem;margin-bottom:2rem;}
+            .cta-button{padding:.95rem 2rem;font-size:1rem;}
 
-    /* ---------- feature cards ----------------- */
-    .feature-card{                 
-    cursor: pointer;
-    }
+            .hero-credential{
+                flex-direction:column;
+                gap:1rem;
+                text-align:center;
+                margin-top:2.5rem;
+                padding-top:1.5rem;
+            }
+            .hero-credential .credential-logo{height:38px;}
+            .hero-credential .credential-quote{
+                text-align:center;
+                font-size:.9rem;
+                max-width:100%;
+            }
 
-    /* disable the desktop hover on touch screens */
-    @media (hover:none){
-    .feature-card:hover{
-    transform: none;
-    }
-    }
+            .content-wrapper{
+                flex-direction: column;
+                gap: 2rem;
+                min-height:auto;
+            }
 
-    /* the real flip will be done through JS
-    (class .flipped is toggled on tap)         */
-    .feature-card.flipped{
-    transform: rotateY(180deg);
-    }
-    }
-    /* ───────────────── HEADER : two compact buttons ─────────────── */
-    .header-banner .cta-group{display:flex;gap:.75rem;align-items:center}
-    .header-banner .cta-button{
-        background:var(--primary-gradient);            /* vivid gradient  */
-        color:#fff;                                    /* visible on white*/
-        font-size:.83rem;padding:.55rem 1.2rem;border:none;
-    }
-    .header-banner .cta-button:hover{
-        transform:translateY(-2px);box-shadow:0 8px 26px rgba(0,0,0,.18);
-    }
-    .header-banner .cta-button.secondary{              /* outlined version*/
-        background:transparent;border:1px solid var(--text-primary);
-        color:var(--text-primary);
-    }
-    .header-banner .cta-button.secondary:hover{
-        background:var(--text-primary);color:#fff;
-    }
+            #what-is .content-wrapper{
+                flex-direction: column-reverse;
+            }
 
-    /* ───────────────── stylish EN / ES switch ───────────────────── */
-    #language-switcher button{
-        background:none;border:none;cursor:pointer;
-        font-weight:600;font-size:.85rem;letter-spacing:.04em;
-        color:var(--text-primary);padding:.4rem .5rem;position:relative;
-    }
-    #language-switcher button::after{                  /* little underline*/
-        content:'';position:absolute;left:0;bottom:-2px;height:2px;width:100%;
-        background:var(--accent-gradient);transform:scaleX(0);
-        transform-origin:left;transition:transform .3s;
-    }
-    #language-switcher button:hover::after{transform:scaleX(1)}
+            .image-content{
+                width:100%;
+            }
+            .image-content img,
+            .image-content video{
+                max-width: 100%;
+                width:100%;
+                height:auto;
+            }
 
-    /* ───────────────── prettier contact-form ─────────────────────── */
-    #contactModal .modal-content{max-width:500px;width:92%}        /* limit width */
-    #contactModal input,#contactModal textarea{
-        width:100%;padding:.85rem 1rem;margin-bottom:1rem;
-        border:1px solid #d0d0d0;border-radius:10px;font-size:1rem;
-        font-family:inherit;background:rgba(255,255,255,.9);
-    }
-    #contactModal button[type="submit"]{
-        width:100%;padding:1rem 0;border:none;border-radius:50px;
-        background:var(--primary-gradient);color:#fff;font-weight:600;
-        cursor:pointer;transition:.25s;
-    }
-    #contactModal button[type="submit"]:hover{
-        transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.18);
-    }
+            #visitor-app .image-content img{
+                width:100%;
+            }
+            .visitor-screenshot-desktop { display: none; }
 
-    /* ───────── permanent, centred “Reach-out” form ───────── */
-    #contactModal{
-        position:fixed;        /* stay on screen even while scrolling    */
-        inset:0;               /* cover the whole viewport               */
-        align-items:center;
-        justify-content:center;
-        background:rgba(0,0,0,.25);          /* soft dim around the card */
-        z-index:3000;          /* above everything else                  */
-    }
-    #contactModal .modal-content{
-        margin:0 auto;         /* horizontal centring                    */
-    }
+            .visitor-screenshots-mobile {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                width: 100%;
+                align-items: center;
+                background: transparent;
+                box-shadow: none;
+            }
+            .visitor-screenshots-mobile img {
+                width: 100%;
+                max-width: 420px;
+                height: auto;
+                background: transparent;
+                box-shadow: none;
+                border: none;
+            }
 
-    /* ─── INLINE form inside the last CTA ─────────────────────── */
-    .demo-inline-form{
-    max-width:540px;margin:3.5rem auto 0;
-    padding:2.2rem 2.4rem;
-    background:rgba(255,255,255,.85);
-    border-radius:18px;box-shadow:var(--shadow-light);
-    }
-    .demo-inline-form h3{margin-bottom:1.4rem;text-align:center}
+            .image-content video{
+                border-radius: 14px;
+            }
 
-    .demo-inline-form input,
-    .demo-inline-form textarea{
-    width:100%;padding:.85rem 1rem;margin-bottom:1rem;
-    border:1px solid #d0d0d0;border-radius:10px;font-size:1rem;
-    font-family:inherit;background:rgba(255,255,255,.9);
-    }
-    .demo-inline-form button{
-    width:100%;padding:1rem 0;border:none;border-radius:50px;
-    background:var(--primary-gradient);color:#fff;font-weight:600;
-    cursor:pointer;transition:.25s;
-    }
-    .demo-inline-form button:hover{
-    transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.18);
-    }
-    /* ─── prettier “Ready to see it live?” area ─────────────────────────── */
-    .cta-section{
-        text-align:center;
-        padding:6rem 0;                      /* give the block some air     */
-    }
+            .case-study-screenshot{
+                width:80%;
+                max-width:320px;
+            }
+            .case-study-stats{justify-content:center;}
+            .case-study-cta{align-self:center;}
+            .case-study-header{
+                justify-content:center;
+                text-align:center;
+                flex-wrap:wrap;
+            }
+            .case-study-quote{
+                text-align:center;
+                border-left:none;
+                border-top:3px solid;
+                border-image:var(--primary-gradient) 1;
+                padding:1.2rem 0 0 0;
+            }
 
-    .cta-section h2{margin-bottom:.6rem;}    /* tighter title → subtitle    */
+            .feature-card{cursor:pointer;}
+        }
 
-    .cta-section p{                          /* subtitle itself             */
-        font-size:1.15rem;
-        margin-bottom:2.2rem;                /* distance from the button    */
-        color:var(--text-primary);
-    }
-
-    /* button now fully visible on the light background                    */
-    .cta-section .cta-button{
-        background:var(--primary-gradient);  /* vivid gradient              */
-        color:#fff;                          /* white ON purple = readable  */
-        border:none;
-    }
-
-    /* ─── real footer makeover ─────────────────────────────────────────── */
-    footer.footer{
-        background:var(--dark-gradient);     /* nice dark-blue gradient     */
-        color:var(--text-light);
-        padding:2.6rem 0;
-        text-align:center;
-    }
-
-    footer.footer .container{
-        display:flex;
-        flex-direction:column;
-        gap:.7rem;                           /* space between rows          */
-        align-items:center;
-    }
-
-    footer.footer .privacy-link{
-        color:var(--text-light);
-        text-decoration:none;
-        font-weight:500;
-        position:relative;
-    }
-
-    /* subtle animated underline on hover                                  */
-    footer.footer .privacy-link::after{
-        content:'';
-        position:absolute;
-        left:0; bottom:-4px;
-        width:100%; height:2px;
-        background:var(--accent-gradient);
-        transform:scaleX(0);
-        transform-origin:left;
-        transition:transform .3s;
-    }
-    footer.footer .privacy-link:hover::after{transform:scaleX(1);}
-    .nav-pricing{
-    font-weight:600;
-    font-size:.9rem;
-    letter-spacing:.04em;
-    color:var(--text-primary);
-    text-decoration:none;
-    margin-right:1.5rem;        /* pushes it away from the logo */
-    }
-    .nav-pricing:hover{opacity:.7}  /* tiny feedback, still “just text” */
-
+        @media (max-width: 640px){
+            .container{padding:0 16px;}
+            .header-banner .cta-group{gap:.4rem;}
+            .header-banner .cta-button{font-size:.7rem;padding:.4rem .7rem;}
+            .company-name{font-size:1.3rem;}
+            .hero h1{font-size:1.7rem;}
+            .case-study-stats{gap:1.2rem;}
+            .case-study-stats .stat-number{font-size:1.8rem;}
+            .demo-inline-form{padding:1.6rem 1.2rem;}
+        }
     </style>
 </head>
 
 <body>
 
-<!-- scroll bar -------------------------------------------------------------------->
+<!-- scroll bar -->
 <div class="scroll-indicator"><div class="scroll-progress" id="scrollProgress"></div></div>
 
-<!-- header ----------------------------------------------------------------------->
+<!-- header -->
 <header class="header-banner" id="header">
   <div class="container">
     <div class="banner-content">
-      <!-- logo & brand --------------------------------------------------->
       <div style="display:flex;align-items:center;gap:1rem;">
         <img src="/assets/logo.png" class="logo" alt="Vagari logo">
         <a class="company-name" href="#">Vagari</a>
       </div>
 
-      <!-- TWO compact buttons ------------------------------------------->
       <div class="cta-group">
         <a  class="cta-button"
             href="https://calendly.com/isidro-vagariknows/30min"
@@ -440,7 +577,6 @@
             id="openModalHeader">Contáctanos</a>
       </div>
 
-      <!-- small EN / ES switch ------------------------------------------>
       <div id="language-switcher" style="position:fixed;top:10px;right:10px;">
         <button id="switch-language">EN</button>
       </div>
@@ -448,7 +584,7 @@
   </div>
 </header>
 
-<!-- HERO ------------------------------------------------------------------------->
+<!-- HERO -->
 <section class="hero">
     <div class="container">
         <div class="hero-content">
@@ -464,102 +600,148 @@
                     class="cta-button secondary open-contact"
                     id="openModal">Contáctanos</a>
             </div>
+
+            <div class="hero-credential">
+                <img src="/assets/espailogo.png" alt="Logo museo" class="credential-logo">
+                <p class="credential-quote">
+                    <span>“Ahora podemos responder a los visitantes de forma individual—algo que antes simplemente no podíamos hacer.” </span>
+                    <span class="credential-author">— Mònica Larruy, Directora, Fundació Espai Guinovart </span>
+                </p>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- WHAT IS VAGARI --------------------------------------------------------------->
+<!-- VISITOR APP -->
+<section class="section" id="visitor-app">
+    <div class="container">
+        <div class="content-wrapper">
+            <div class="text-content">
+                <h2>Qué es Vagari?</h2>
+                <p style="font-size:1.2rem;line-height:1.7;margin-top:1rem;">
+                    La app que mejora la experiencia de tus visitantes con el mejor contenido personalizado e interactivo. Guíalos y deja que encuentren su propio camino.
+                </p>
+            </div>
+            <div class="image-content">
+                <!-- Desktop: combined screenshot -->
+                <img src="/assets/screenshotsEspaiSpanish.png"
+                    alt="Captura de pantalla de la app del visitante"
+                    class="visitor-screenshot-desktop">
+
+                <!-- Mobile: three separate screenshots, stacked -->
+                <div class="visitor-screenshots-mobile">
+                    <img src="/assets/audioScreenshotSpanish.png" alt="Captura app visitante 1">
+                    <img src="/assets/quizzScreenshotSpanish.png" alt="Captura app visitante 2">
+                    <img src="/assets/chatbotScreenshotSpanish.png" alt="Captura app visitante 3">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHAT IS VAGARI -->
 <section class="section" id="what-is">
   <div class="container">
     <div class="content-wrapper">
-
-      <!----- video ----->
       <div class="image-content">
-        <video autoplay
-               muted
-               loop
-               playsinline          
-               preload="auto"       
+        <video autoplay muted loop playsinline preload="auto"
                style="max-width:100%;border-radius:20px;box-shadow:var(--shadow-heavy);">
           <source src="/assets/whatIsVagari.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
       </div>
-
-      <!----- text ----->
       <div class="text-content">
-        <h2>Qué es Vagari?</h2>
         <p style="font-size:1.2rem;line-height:1.7;margin-top:1rem;">
-          Una plataforma digital intuitiva con las mejores herramientas de IA 
-          para crear, gestionar y distribuir audioguías adaptadas a tus usuarios – en minutos.
+          Una plataforma digital intuitiva con las mejores herramientas de IA para crear, gestionar y
+          distribuir audioguías, cuestionarios y guías con IA adaptadas a tus grupos de usuarios – en minutos.
         </p>
       </div>
-
     </div>
   </div>
 </section>
 
-
-<!-- VISITOR APP ------------------------------------------------------------------>
-<section class="section" id="visitor-app">
+<!-- CASE STUDY -->
+<section class="section" id="case-study">
     <div class="container">
-        <div class="content-wrapper">
-            <div class="text-content">
-                <p style="font-size:1.2rem;line-height:1.7;margin-top:1rem;">
-                    Una app web móvil sencilla donde tus visitantes disfrutan de todo el contenido.
-                </p>
-            </div>
+        <h2>Míralo en acción</h2>
+        <div class="content-wrapper case-study-wrapper">
             <div class="image-content">
-                <video
-                    autoplay
-                    muted
-                    loop
-                    playsinline
-                    preload="auto"
-                    style="max-width:100%;border-radius:20px;box-shadow:var(--shadow-heavy);">
-                    <source src="/assets/webapp2.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
+                <img src="/assets/TourStopGuinoSpanish.png"
+                    alt="Captura de pantalla de la app del visitante"
+                    class="case-study-screenshot">
+            </div>
+            <div class="text-content">
+                <div class="case-study-header">
+                    <img src="/assets/espailogo.png" alt="Logo museo" class="case-study-logo">
+                    <div>
+                        <h3>Espai Guinovart</h3>
+                        <p class="case-study-context">Un centro de arte contemporáneo dedicado a la obra inmersiva y site-specific de Josep Guinovart, junto con un programa de exposiciones temporales.</p>
+                    </div>
+                </div>
+
+                <blockquote class="case-study-quote">
+                    "Nos ayuda a responder a los visitantes de forma más individual, algo que antes no era posible.
+Estamos viendo una interacción más reflexiva, con visitantes que encuentran su propio camino por el espacio.
+Nos da una mejor idea de cómo la gente interactúa con la colección a medida que ocurre."
+                    <footer>— Mònica Larruy, Directora</footer>
+                </blockquote>
+
+                <div class="case-study-stats">
+                    <div class="stat">
+                        <span class="stat-number">10</span>
+                        <span class="stat-label">Tours creados</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Idiomas</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Experiencias dinámicas con IA</span>
+                    </div>
+                </div>
+
+                <a href="https://espaiguinovart.vagariknows.com"
+                   target="_blank" rel="noopener"
+                   class="cta-button case-study-cta">Prueba el tour en vivo →</a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- HOW DOES IT WORK ------------------------------------------------------------->
+<!-- HOW DOES IT WORK -->
 <section class="section how-it-works" id="how-it-works">
     <div class="container">
         <h2>Cómo funciona?</h2>
-
         <div class="steps-horizontal">
             <div class="step">
                 <div class="step-icon">📤</div>
-                <h3>1. Sube información</h3>
-                <p>Sube archivos relevantes de tu artefacto o espacio (fotos, textos, mensajes…)</p>
+                <h3>1. Sube</h3>
+                <p>Sube información relevante de tu espacio (fotos, textos, notas de voz…)</p>
             </div>
             <div class="step">
                 <div class="step-icon">🎛️</div>
-                <h3>2. Genera el guión</h3>
-                <p>Selecciona duración, estilo, audiencia (general, niños…) e idiomas</p>
+                <h3>2. Ajusta y guioniza</h3>
+                <p>Selecciona duración, estilo, audiencia (general, niños 8-12…), idiomas y genera los guiones con IA</p>
             </div>
             <div class="step">
                 <div class="step-icon">🔊</div>
-                <h3>3. Genera el audio</h3>
-                <p>Elige voces y estilo narrativo, y auto-genera con IA los audios</p>
+                <h3>3. Voz y audio</h3>
+                <p>Elige voces / estilos narrativos y genera con IA los archivos de audio</p>
             </div>
             <div class="step">
                 <div class="step-icon">🚀</div>
                 <h3>4. Publica</h3>
-                <p>Revisa y publica a la app de tus visitantes – auto-genera QRs y pagos si quieres</p>
+                <p>Revisa y publica en la app de tus visitantes – auto-genera QRs y pasarelas de pago si lo necesitas</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- WHO IS VAGARI FOR ------------------------------------------------------------>
+<!-- WHO IS VAGARI FOR -->
 <section class="section" id="audience">
     <div class="container">
         <h2>Para quién es Vagari?</h2>
-
         <div class="audience-grid">
             <div class="audience-item"><div class="icon">🏛️</div>Museos</div>
             <div class="audience-item"><div class="icon">⛪</div>Lugares de culto</div>
@@ -571,11 +753,10 @@
     </div>
 </section>
 
-<!-- WHY CHOOSE ------------------------------------------------------------------->
+<!-- WHY CHOOSE -->
 <section class="section" id="why">
     <div class="container">
         <h2>Por qué eligen Vagari?</h2>
-
         <div class="why-props">
             <div class="why-prop">
                 <div class="icon">🧩</div>
@@ -595,140 +776,76 @@
             <div class="why-prop">
                 <div class="icon">🌍</div>
                 <h3>Multilingüe</h3>
-                <p>Más de 40 idiomas para llegar a todos</p>
+                <p>Más de 40 idiomas automáticamente para llegar a todo el mundo</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- FEATURES --------------------------------------------------------------------->
+<!-- FEATURES -->
 <section class="section" id="features">
     <div class="container">
         <h2>Funcionalidades</h2>
         <ul class="features-list">
             <li class="feature-card">
-                <div class="front">
-                    <span class="feature-icon">🤖</span>
-                    <p>Agente IA de Guión con control de duración, audiencia y estilo</p>
-                </div>
-                <div class="back">
-                    <span class="feature-icon">🤖</span>
-                    Auto-escribe historias que enganchan
-                </div>
+                <div class="front"><span class="feature-icon">🤖</span><p>Agente IA de Guión con control de duración, audiencia y estilo</p></div>
+                <div class="back"><span class="feature-icon">🤖</span>Auto-escribe historias que enganchan</div>
             </li>
-
             <li class="feature-card">
-                <div class="front">
-                    <span class="feature-icon">🎙️</span>
-                    <p>Agente IA de Voz con múltiples voces y estilos narrativos</p>
-                </div>
-                <div class="back">
-                    <span class="feature-icon">🎙️</span>
-                    Sonido natural
-                </div>
+                <div class="front"><span class="feature-icon">🎙️</span><p>Agente IA de Voz con múltiples voces y estilos narrativos</p></div>
+                <div class="back"><span class="feature-icon">🎙️</span>Sonido natural</div>
             </li>
-
             <li class="feature-card">
-                <div class="front">
-                    <span class="feature-icon">🌐</span>
-                    <p>Más de 40 idiomas, auto-generados</p>
-                </div>
-                <div class="back">
-                    <span class="feature-icon">🌐</span>
-                    Habla cualquier lengua
-                </div>
+                <div class="front"><span class="feature-icon">🌐</span><p>Más de 40 idiomas, auto-generados</p></div>
+                <div class="back"><span class="feature-icon">🌐</span>Habla cualquier lengua</div>
             </li>
-
             <li class="feature-card">
-                <div class="front">
-                    <span class="feature-icon">🗺️</span>
-                    <p>Itinerarios temáticos</p>
-                </div>
-                <div class="back">
-                    <span class="feature-icon">🗺️</span>
-                    Tours curados
-                </div>
+                <div class="front"><span class="feature-icon">🗺️</span><p>Itinerarios temáticos</p></div>
+                <div class="back"><span class="feature-icon">🗺️</span>Tours curados</div>
             </li>
-
             <li class="feature-card">
-                <div class="front">
-                    <span class="feature-icon">🖥️</span>
-                    <p>Consola web y app móvil del visitante</p>
-                </div>
-                <div class="back">
-                    <span class="feature-icon">🖥️</span>
-                    Controla y cumple
-                </div>
+                <div class="front"><span class="feature-icon">🖥️</span><p>Consola web y app móvil del visitante</p></div>
+                <div class="back"><span class="feature-icon">🖥️</span>Controla y cumple</div>
             </li>
-
             <li class="feature-card">
-                <div class="front">
-                    <span class="feature-icon">💸</span>
-                    <p>Herramientas de monetización</p>
-                </div>
-                <div class="back">
-                    <span class="feature-icon">💸</span>
-                    Aprovecha tu patrimonio
-                </div>
+                <div class="front"><span class="feature-icon">💸</span><p>Herramientas de monetización</p></div>
+                <div class="back"><span class="feature-icon">💸</span>Aprovecha tu patrimonio</div>
             </li>
-
             <li class="feature-card">
-                <div class="front">
-                    <span class="feature-icon">📱</span>
-                    <p>Códigos QR para tus guías y app</p>
-                </div>
-                <div class="back">
-                    <span class="feature-icon">📱</span>
-                    Acceso en 1 click
-                </div>
+                <div class="front"><span class="feature-icon">📱</span><p>Códigos QR para tus guías y app</p></div>
+                <div class="back"><span class="feature-icon">📱</span>Acceso en 1 click</div>
             </li>
-
             <li class="feature-card">
-                <div class="front">
-                    <span class="feature-icon">📈</span>
-                    <p>Analítica de comportamiento de visitantes</p>
-                </div>
-                <div class="back">
-                    <span class="feature-icon">📈</span>
-                    Entiende a tu audiencia
-                </div>
+                <div class="front"><span class="feature-icon">📈</span><p>Analítica de comportamiento de visitantes</p></div>
+                <div class="back"><span class="feature-icon">📈</span>Entiende a tu audiencia</div>
             </li>
-
             <li class="feature-card">
-                <div class="front">
-                    <span class="feature-icon">📴</span>
-                    <p>Acceso offline</p>
-                </div>
-                <div class="back">
-                    <span class="feature-icon">📴</span>
-                    Funciona sin señal
-                </div>
+                <div class="front"><span class="feature-icon">📴</span><p>Acceso offline</p></div>
+                <div class="back"><span class="feature-icon">📴</span>Funciona sin señal</div>
             </li>
         </ul>
-
     </div>
 </section>
 
-<!-- CTA ------------------------------------------------------------------------->
+<!-- CTA -->
 <section class="cta-section" id="demo">
     <div class="container">
         <h2>Listo para verlo?</h2>
         <p>Agenda una demo personalizada o escríbenos – te respondemos en 24 h.</p>
-
         <div class="cta-wrapper">
             <a  class="cta-button"
                 href="https://calendly.com/isidro-vagariknows/30min"
                 target="_blank" rel="noopener">Agenda una demo</a>
         </div>
     </div>
-    <form action="https://formspree.io/f/xvgraeoa" method="POST" class="demo-inline-form"> <h3>Contáctanos</h3>
+    <form action="https://formspree.io/f/xvgraeoa" method="POST" class="demo-inline-form">
+        <h3>Contáctanos</h3>
         <input type="text"   name="name"     placeholder="Nombre"     required>
         <input type="text"   name="surname"  placeholder="Apellidos"  required>
         <input type="email"  name="email"    placeholder="Email"    required>
         <input type="text"   name="entity"   placeholder="Entidad"   required>
         <input type="text"   name="role"     placeholder="Rol">
-        <textarea name="message" placeholder="Mensaje"
-                    style="min-height:100px;resize:vertical"></textarea>
+        <textarea name="message" placeholder="Mensaje" style="min-height:100px;resize:vertical"></textarea>
         <button type="submit">Enviar</button>
         <p style="text-align:center;margin-top:1rem;color:#666;font-size:.9rem;">
             O escríbenos a isidro@vagariknows.com
@@ -736,7 +853,7 @@
      </form>
 </section>
 
-<!-- MODAL (unchanged) & FOOTER --------------------------------------------------->
+<!-- MODAL & FOOTER -->
 <div id="contactModal" class="modal">
     <div class="modal-content">
         <button class="close-modal" aria-label="Close">&times;</button>
@@ -757,76 +874,48 @@
 
 <footer class="footer" id="contact">
     <div class="container">
-        <p>&copy; 2025 Vagari</p>
-        <div class="footer-links" >
+        <p>&copy; 2025 Vagari. Transformando experiencias culturales con inteligencia artificial.</p>
+        <div class="footer-links">
             <a class="privacy-link" href="privacy-policy.html">Privacy Policy</a>
         </div>
     </div>
 </footer>
 
-<!-- =================================================================================
-     ORIGINAL  JS  (only two selectors updated so the new buttons open the modal)
-================================================================================= -->
 <script>
-    /* --- automatic, one-time redirection ---------------------------------- */
     (function () {
-    /* run this block only once per browser session so we don't annoy users */
-    if (sessionStorage.getItem('langRedirectDone')) return;
-    sessionStorage.setItem('langRedirectDone', 'yes');
-
-    /* we only redirect when somebody lands on the root “/” --------------- */
-    const onRoot       = window.location.pathname === '/' ||
-                        window.location.pathname === '/index.html';
-    if (!onRoot) return;
-
-    /* read the main browser language                                      */
-    const browserLang  = (navigator.language || 'en').toLowerCase();
-
-    /* if it does NOT start with “es” we assume the visitor prefers English */
-    if (!browserLang.startsWith('es')) {
-        window.location.replace('/en');        // swap “/en” if your folder changes
-    }
-
-    /* optional tiny geo-fallback: anybody whose language starts with “es” 
-        but is NOT in Spain (“es-es”) still stays in ES, which is what
-        you asked for. */
-    })();
-    /* --- -------------------------------------------------- */
-    (function () {
-    const switchBtn = document.getElementById('switch-language');
-
-    /* Is the page we are looking at the English one?                      */
-    const onEnglishPage = window.location.pathname.startsWith('/en');
-
-    /* Write the opposite language in the button …                         */
-    switchBtn.textContent = onEnglishPage ? 'ES' : 'EN';
-
-    /* …and send the visitor there when he clicks                          */
-    switchBtn.addEventListener('click', () => {
-        if (onEnglishPage) {
-        window.location.href = '/';         // go to Spanish root
-        } else {
-        window.location.href = '/en';       // go to English version
+        if (sessionStorage.getItem('langRedirectDone')) return;
+        sessionStorage.setItem('langRedirectDone', 'yes');
+        const onRoot = window.location.pathname === '/' || window.location.pathname === '/index.html';
+        if (!onRoot) return;
+        const browserLang = (navigator.language || 'en').toLowerCase();
+        if (!browserLang.startsWith('es')) {
+            window.location.replace('/en');
         }
-    });
     })();
 
-    // scroll progress bar
+    (function () {
+        const switchBtn = document.getElementById('switch-language');
+        const onEnglishPage = window.location.pathname.startsWith('/en');
+        switchBtn.textContent = onEnglishPage ? 'ES' : 'EN';
+        switchBtn.addEventListener('click', () => {
+            window.location.href = onEnglishPage ? '/' : '/en';
+        });
+    })();
+
     window.addEventListener('scroll',()=>{
         const scrollTop=window.pageYOffset;
         const docHeight=document.body.offsetHeight;
         const winHeight=window.innerHeight;
         const percent=Math.round((scrollTop/(docHeight-winHeight))*100);
-        document.getElementById('scrollProgress').style.width=percent+'%';
+        const el = document.getElementById('scrollProgress');
+        if(el) el.style.width=percent+'%';
     });
 
-    // sticky header shade
     window.addEventListener('scroll',()=>{
         const header=document.getElementById('header');
         if(window.scrollY>100)header.classList.add('scrolled');else header.classList.remove('scrolled');
     });
 
-    // reveal sections on scroll
     const observer=new IntersectionObserver((entries)=>{
         entries.forEach((entry,i)=>{
             if(entry.isIntersecting)setTimeout(()=>entry.target.classList.add('visible'),i*200);
@@ -834,34 +923,28 @@
     },{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
     document.querySelectorAll('.section').forEach(sec=>observer.observe(sec));
 
-    /*  ripple effect, hero parallax, keyboard nav etc. – leave exactly as in your old file */
     document.querySelectorAll('.feature-card').forEach(card=>{
         card.addEventListener('click',()=>card.classList.toggle('flipped'));
-        });
+    });
 
-    /* ─── pop-up open / close logic ───────────────────────────── */
-    const contactModal   = document.getElementById('contactModal');
-    const openButtons    = document.querySelectorAll('.open-contact');
-    const closeBtn       = contactModal.querySelector('.close-modal');
+    const contactModal = document.getElementById('contactModal');
+    const openButtons  = document.querySelectorAll('.open-contact');
+    const closeBtn     = contactModal.querySelector('.close-modal');
 
-    /* open on any “Book a demo / Get in touch” click */
     openButtons.forEach(btn => btn.addEventListener('click', e =>{
-    e.preventDefault();                 // stay on the page
-    contactModal.classList.add('open'); // show modal
-    document.body.style.overflow='hidden';   // stop background scroll
+        e.preventDefault();
+        contactModal.classList.add('open');
+        document.body.style.overflow='hidden';
     }));
 
-    /* close with the X */
     closeBtn.addEventListener('click', () => closeModal());
-
-    /* close by clicking the shaded backdrop (but not the card) */
     contactModal.addEventListener('click', e =>{
-    if (e.target === contactModal) closeModal();
+        if (e.target === contactModal) closeModal();
     });
 
     function closeModal(){
-    contactModal.classList.remove('open');
-    document.body.style.overflow='';    // restore scroll
+        contactModal.classList.remove('open');
+        document.body.style.overflow='';
     }
 </script>
 </body>
