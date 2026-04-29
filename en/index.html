@@ -137,6 +137,7 @@
         
         /* === enlarge the video in the “What is Vagari?” section ===================== */
         @media (min-width: 1024px) {          /* desktop / tablets */
+            
         #what-is .image-content { flex: 2; }   /* video column 2-parts   */
         #what-is .text-content  { flex: 1; }   /* text  column 1-part    */
 
@@ -146,6 +147,13 @@
         }
         #audience .audience-grid{
             grid-template-columns: repeat(3, 1fr);   /* 3 columns */
+        }
+
+        #visitor-app .text-content  { flex: 0 0 38%; }
+        #visitor-app .image-content { flex: 1; justify-content: flex-end; }
+        #visitor-app .case-study-screenshot {
+            width: 100%;
+            max-width: 560px;
         }
         
         #visitor-app .image-content{
@@ -537,7 +545,7 @@
     }
     /* Case study screenshot - no container, transparent fusion with background */
     .case-study-screenshot{
-        width:130%;
+        width:auto;
         max-width:none;
         height:auto;
         background:transparent;
@@ -640,7 +648,7 @@
             <div class="text-content">
                 <h2>What is Vagari?</h2>
                 <p style="font-size:1.2rem;line-height:1.7;margin-top:1rem;">
-                    A friendly mobile web-app where visitors can enjoy all your content, and let themselves be inspired or pursue their own passions.
+                    The app that augments your visitors experience with the best, personalized, interactive content. Guide them and let them find their own path.
                 </p>
             </div>
             <div class="image-content">
@@ -691,7 +699,7 @@
 
             <!-- Screenshot / phone mockup -->
             <div class="image-content">
-                <img src="/assets/TourStopGuino.png"
+                <img src="/assets/TourStopGuinoEnglish.png"
                     alt="Museum visitor app screenshot"
                     class="case-study-screenshot">
             </div>
