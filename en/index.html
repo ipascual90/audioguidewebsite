@@ -151,21 +151,20 @@
 
         #visitor-app .text-content  { flex: 1; }
         #visitor-app .image-content { flex: 2; }
-        
-        #visitor-app .image-content{
-            justify-content:center;
-            width:130%;
-            }
 
-            #visitor-app .image-content video{
-            width:50%;                        /* ± half the original size */
-            max-width:340px;                  /* hard cap for large desks */
-            }}
+        #visitor-app .image-content img {
+            width: 70%;          /* smaller than before */
+            max-width: 380px;    /* hard cap on large screens */
+            height: auto;
+            padding-left: 2rem;  /* extra space from the text */
+        }
+        
 
         @media (max-width:1024px){           /* phones / small tablets   */
-        #visitor-app .image-content video{
-            width:70%;                      /* a bit larger on small screens */
-        }
+        #visitor-app .image-content img {
+                width: 70%;
+                max-width: 340px;
+            }
         }
         
         .features-list{
